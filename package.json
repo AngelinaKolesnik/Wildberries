@@ -1,0 +1,26 @@
+{
+  "name": "wildberries",
+  "version": "1.0.0",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngelinaKolesnik/Wildberries.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelinaKolesnik/Wildberries/issues"
+  },
+  "homepage": "https://github.com/AngelinaKolesnik/Wildberries#readme",
+  "description": "",
+  "dependencies": {
+    "parcel": "^2.8.2"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.2"
+  }
+}
