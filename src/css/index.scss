@@ -77,27 +77,24 @@ body {
 		@media (max-width:1200px ) {
 			padding: 20px;
 		}
-	.basket_img {
-		width: 40px;
-		height: 27px;
-		display: block;
-		margin-left: 7px;
-		margin-bottom: 5px;
-		@media (max-width:1200px ) {
-			width: 30px;
-			height: 26px;
-			margin-left: 14px;
+		.basket_img {
+			width: 40px;
+			height: 27px;
+			display: block;
+			margin-left: 7px;
+			margin-bottom: 5px;
+			@media (max-width:1200px ) {
+				width: 30px;
+				height: 26px;
+				margin-left: 14px;
+			}
 		}
-	}
-	.basket_el {
-		font-size: 16px;
-		color: rgba(255,255,255,.6);
-	}
-	}	
+		.basket_el {
+			font-size: 16px;
+			color: rgba(255,255,255,.6);
+		}
+	}		
 }
-// .header_navigation-search::placeholder {
-// 	color: red;
-// }
 .basket:hover {
 	.basket_el {
 		color: rgba(255,255,255,256);
