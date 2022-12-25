@@ -1,0 +1,30 @@
+*{
+	text-decoration: none;
+	list-style: none;
+	list-style-type: none;
+	box-sizing: border-box;
+};
+
+h1, h2, h3, h4, h5, h6, body, p {
+	margin: 0;
+};
+
+.container {
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 32px;
+
+	@media (max-width: 1200px) {
+		max-width: 1140px;
+		padding: 0 16px;
+	};
+
+	@media (max-width: 992px) {
+		max-width: 960px;
+	};
+
+	@media (max-width: 768px) {
+		max-width: 720px;
+	};
+};

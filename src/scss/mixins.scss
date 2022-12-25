@@ -1,0 +1,48 @@
+@mixin ffr400 {
+	font-family: 'Raleway_400';
+	font-weight: 400;
+	font-style: normal;
+};
+
+@mixin ffr400it {
+	font-family: 'Raleway_400_Italic';
+	font-weight: 400;
+	font-style: italic;
+};
+
+@mixin ffr500 {
+	font-family: 'Raleway_500';
+	font-weight: 500;
+	font-style: normal;
+};
+
+@mixin ffr500it {
+	font-family: 'Raleway_500_Italic';
+	font-weight: 500;
+	font-style: italic;
+};
+
+@mixin ffr600 {
+	font-family: 'Raleway_600';
+	font-weight: 600;
+	font-style: normal;
+};
+
+@mixin ffr700 {
+	font-family: 'Raleway_700';
+	font-weight: 700;
+	font-style: normal;
+};
+
+@mixin ffr900 {
+	font-family: 'Raleway_900';
+	font-weight: 900;
+	font-style: normal;
+};
+
+@mixin center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+};

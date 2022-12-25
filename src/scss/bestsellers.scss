@@ -1,0 +1,104 @@
+.bestsellers {
+	&__title {
+		@include ffr700;
+		font-size: 24px;
+   	line-height: 32px;
+		margin: 8px 0 20px;
+		margin-left: 10%;
+	};
+
+	&__list {
+		margin: 0 -15px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__item {
+		padding: 0 15px 20px;
+		width: 16.666%;
+	};
+
+	&__wrap {
+		position: relative;
+	};
+
+	&__img {
+		width: 100%;
+		object-fit: cover;
+	};
+
+	&__quick-view {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		width: 80%;
+		height: 10%;
+		font-size: 12px;
+		background: $extra-soft-purple;
+		color: $purple;
+		border: solid 1px $purple;
+		opacity: 0.85;
+		border-radius: 15px;
+		@include ffr600;
+	};
+
+	&__discount {
+		position: absolute;
+		left: 5%;
+		bottom: 5%;
+		background: $extra-soft-purple;
+		color: $purple;
+		padding: 5px;
+		border-radius: 25%;
+		@include ffr600;
+		font-size: 14px;
+		line-height: 14px;
+	};
+
+	&__add-to-basket {
+		position: absolute;
+		right: 5%;
+		bottom: 5%;
+		background: $purple;
+		border: 0;
+		border-radius: 50%;
+		padding: 5px;
+		height: 30px;
+		width: 40px;
+
+		img {
+			@include center;
+			margin: auto;
+		};
+	};
+
+	&__price {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px;
+		position: relative;
+	};
+
+	&__with-discount{
+		@include ffr700;
+		font-size: 16px;
+		@include center;
+	};
+
+	&__without-discount {
+		text-decoration: line-through;
+		color: $grey;
+		font-size: 14px;
+		@include ffr400;
+		@include center;
+	};
+
+	&__name {
+		font-size: 14px;
+		@include ffr400;
+		position: relative;
+	};
+};
