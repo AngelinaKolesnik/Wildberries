@@ -11,6 +11,15 @@ button {
 	@include ffr600;
 	font-size: 16px;
 	padding: 15px;
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+		padding: 10px;
+	}
+			
+	@media (max-width: 576px) {
+		font-size: 12px;
+	}
 }
 
 .btn-heart {
@@ -19,9 +28,7 @@ button {
 	position: relative;
 	height: 7px;
 	width: 12px;
-	margin: 45px;
 	border-radius: 50%;
-	box-shadow: 0 0 10px 12px $soft-purple;
 
 	&::before {
 		content: "";
@@ -31,7 +38,7 @@ button {
 		border-radius: 50% 50% 0;
 		margin: auto;
 		position: absolute;
-		inset: 0 0 0px -3px;
+		inset: 0 0 0px -4px;
 		transform: rotate(45deg);
 	}
 
@@ -43,7 +50,7 @@ button {
 		border-radius: 50% 0 50% 50%;
 		margin: auto;
 		position: absolute;
-		inset: 0 -5px 0px 0;
+		inset: 0 -4px 0px 0;
 		transform: rotate(135deg);
 	}
 
