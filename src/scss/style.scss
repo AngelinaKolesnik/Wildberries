@@ -1,13 +1,17 @@
-*{
+* {
 	text-decoration: none;
 	list-style: none;
 	list-style-type: none;
 	box-sizing: border-box;
-};
+}
+
+body {
+	position: relative;
+}
 
 h1, h2, h3, h4, h5, h6, body, p {
 	margin: 0;
-};
+}
 
 .container {
 	width: 100%;
@@ -18,13 +22,20 @@ h1, h2, h3, h4, h5, h6, body, p {
 	@media (max-width: 1200px) {
 		max-width: 1140px;
 		padding: 0 16px;
-	};
+	}
 
 	@media (max-width: 992px) {
 		max-width: 960px;
-	};
+	}
 
 	@media (max-width: 768px) {
 		max-width: 720px;
-	};
-};
+	}
+
+	&--fluid {
+		width: 100%;
+		margin: 0 auto;
+		padding: 0;
+		z-index: 2;
+	}
+}

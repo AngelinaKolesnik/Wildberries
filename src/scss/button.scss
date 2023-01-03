@@ -1,0 +1,92 @@
+button {
+	cursor: pointer;
+	transition: .3s;
+}
+
+.btn-order {
+	background-color: $purple;
+	border: 0;
+	border-radius: 8px;
+	color: #fff;
+	@include ffr600;
+	font-size: 16px;
+	padding: 15px;
+}
+
+.btn-heart {
+	background: 0;
+	border: 0;
+	position: relative;
+	height: 7px;
+	width: 12px;
+	margin: 45px;
+	border-radius: 50%;
+	box-shadow: 0 0 10px 12px $soft-purple;
+
+	&::before {
+		content: "";
+		height: 10px;
+		width: 15px;
+		background: #fff;
+		border-radius: 50% 50% 0;
+		margin: auto;
+		position: absolute;
+		inset: 0 0 0px -3px;
+		transform: rotate(45deg);
+	}
+
+	&::after {
+		content: "";
+		height: 10px;
+		width: 15px;
+		background: #fff;
+		border-radius: 50% 0 50% 50%;
+		margin: auto;
+		position: absolute;
+		inset: 0 -5px 0px 0;
+		transform: rotate(135deg);
+	}
+
+	&:hover::before, &:hover::after {
+		background: $purple;
+	}
+}
+
+.btn-close {
+	position: relative;
+	height: 25px;
+	width: 25px;
+	padding: 0;
+	background: none;
+	border: none;
+
+	&::after {
+		position: absolute;
+		content: '';
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		height: 3px;
+		width: 20px;
+		border-radius: 5px;
+		background-color: $grey;
+		transform: rotate(45deg);
+	}
+
+	&::before {
+		position: absolute;
+		content: '';
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		height: 3px;
+		width: 20px;
+		border-radius: 5px;
+		background-color: $grey;
+		transform: rotate(135deg);
+	}
+}
