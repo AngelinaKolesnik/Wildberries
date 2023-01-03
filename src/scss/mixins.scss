@@ -39,10 +39,3 @@
 	font-weight: 900;
 	font-style: normal;
 };
-
-@mixin center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-};

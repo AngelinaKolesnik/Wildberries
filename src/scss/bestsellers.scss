@@ -5,7 +5,7 @@
    	line-height: 32px;
 		margin: 8px 0 20px;
 		margin-left: 10%;
-	};
+	}
 
 	&__list {
 		margin: 0 -15px;
@@ -16,18 +16,18 @@
 	&__item {
 		padding: 0 15px 20px;
 		width: 16.666%;
-	};
+	}
 
 	&__wrap {
 		position: relative;
-	};
+	}
 
 	&__img {
 		width: 100%;
 		object-fit: cover;
-	};
+	}
 
-	&__quick-view {
+	&__preview-btn {
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -40,10 +40,14 @@
 		background: $extra-soft-purple;
 		color: $purple;
 		border: solid 1px $purple;
-		opacity: 0.85;
+		opacity: .5;
 		border-radius: 15px;
 		@include ffr600;
-	};
+
+		&:hover {
+			opacity: 1;
+		}
+	}
 
 	&__discount {
 		position: absolute;
@@ -56,7 +60,7 @@
 		@include ffr600;
 		font-size: 14px;
 		line-height: 14px;
-	};
+	}
 
 	&__add-to-basket {
 		position: absolute;
@@ -70,35 +74,18 @@
 		width: 40px;
 
 		img {
-			@include center;
 			margin: auto;
-		};
-	};
-
-	&__price {
-		display: flex;
-		justify-content: space-between;
-		margin: 10px;
-		position: relative;
-	};
-
-	&__with-discount{
-		@include ffr700;
-		font-size: 16px;
-		@include center;
-	};
-
-	&__without-discount {
-		text-decoration: line-through;
-		color: $grey;
-		font-size: 14px;
-		@include ffr400;
-		@include center;
-	};
+		}
+	}
 
 	&__name {
 		font-size: 14px;
 		@include ffr400;
 		position: relative;
-	};
-};
+	}
+
+	.price {
+		margin: 10px;
+		justify-content: space-between;
+	}
+}
