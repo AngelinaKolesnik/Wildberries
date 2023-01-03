@@ -31,11 +31,4 @@ h1, h2, h3, h4, h5, h6, body, p {
 	@media (max-width: 768px) {
 		max-width: 720px;
 	}
-
-	&--fluid {
-		width: 100%;
-		margin: 0 auto;
-		padding: 0;
-		z-index: 2;
-	}
 }
