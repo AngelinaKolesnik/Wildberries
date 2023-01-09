@@ -1,30 +1,26 @@
 .korzina {
 
   &__title{
-    font-family: "Raleway_700";
-    font-weight: 700;
-    font-style: normal;
-    font-size: 24px;
-    // line-height: 32px;
+    @include ffr700;
   }
 
-  &__list {
+  &__content {
     display:flex;
   }
 
-  &__row {
+  &__content-row {
     max-width: 900px;
     width: 100%;
     // height: 400px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    border-radius: 5%;
+    border-radius: 10px;
     padding: 25px;
     margin-right: 20px;
     display: flex;
     flex-direction: column;
   }
 
-  &__name-btnDekete{
+  &__topString{
     display: flex;
     justify-content: space-between;
   }
@@ -34,19 +30,26 @@
     // max-height: 40px;
     max-width: 150px;
     width: 100%;
-    background-color: #cb11ab;
-    border: 2px solid #cb11ab;
+    background-color: $purple;
+    border: 2px solid $purple;
     border-radius: 1ch;
     color: #fff;
-    font-family: 'Raleway_600';
-	  font-weight: 600;
-	  font-style: normal;
+    @include ffr600;
     cursor: pointer;
 
     &:hover{
-      background-color: #d734bc;
+      background-color: $purple;
     }
 
+    &:active {
+      position: relative;
+      top: 1px;
+    }
+
+  }
+
+  &__list{
+  
   }
 
   &__item{
@@ -55,43 +58,39 @@
   justify-content: space-between;
   }
 
+  &__item-img{
+    display: flex;
+		margin: auto;
+    object-fit: cover;
+    max-width: 80px;
+    width: 100%;
+		max-height: 100px;
+    height: 100%;
+  }
+
   &__item-img-name{
     display: flex;
   }
 
 	&__item-name {
     font-size: 21px;
-    font-family: 'Raleway_600';
-	  font-weight: 600;
-	  font-style: normal;
+    @include ffr600;
 		}
 
 	&__with-discount {
-    font-family: "Raleway_700";
-    font-weight: 700;
-    font-style: normal;
+    @include ffr700;
     font-size: 30px;
 		}
 
 	&__without-discount {
     text-decoration: line-through;
-    color: grey;
+    color: $grey;
     font-size: 17px;
-    font-family: "Raleway_400";
-    font-weight: 400;
-    font-style: normal;
+    @include ffr400;
 		}
 
-  &__bestsellers-img {
-    width: 80px;
-    height: 100px
-  }
-
-  &__bestsellers-name{
-    font-family: "Raleway_700";
-    font-weight: 700;
-    font-style: normal;
-    font-size: 16px;
+  &__item-price-btnDelete{
+  
   }
 
   &__btn-deleteItem {
@@ -100,41 +99,69 @@
     max-width: 300px;
     width: 100%;
     background-color: #fff;
-    border: 2px solid #cb11ab;
+    border: 2px solid $purple;
     border-radius: 1ch;
-    color: #cb11ab;
+    color: $purple;
     margin-top: 10px;
 
     &:hover{
       background-color: #eec1e6;
     }
 
+    &:active {
+      position: relative;
+      top: 1px;
+    }
+
   }
 
-  &__sumAll {
+  // ORDER 
+
+  &__content-order {
     padding: 25px;
     max-width: 400px;
     width: 100%;
     height: 200px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    border-radius: 5%;
+    border-radius: 10px;
   }
 
-  &__sumAll-top{
+  &__order-top{
     display: flex;
     justify-content: space-between;
   }
 
-  &__sumAll-adress{
+  &__order-title{
+    @include ffr700;
+    font-size: 24px;
+  }
+
+  &__order-allPrice{
+    @include ffr700;
+    font-size: 25px;
+  }
+
+  &__order-adress-title{
+    font-size: 16px;
+    @include ffr500it
+  }
+
+  &__order-adress{
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
   }
 
-  &__sumAll-adress-enter{
+  &__order-adress-enter{
     border: none;
-    border-bottom: 3px #cb11ab dashed;
+    border-bottom: 3px $purple dashed;
     width: 230px;
+    font-size: 14px;
+    @include ffr500it;
+
+    &:focus-visible {
+      outline: $purple auto 1px;
+      }
   }
 
   &__btn-toOrder-wrap{
@@ -147,19 +174,16 @@
     margin-top: 45px;
     height: 50px;
     width: 100%;
-    background-color: #cb11ab;
-    border: 2px solid #cb11ab;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #fff;
-    font-family: 'Raleway_600';
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
 
     &:hover{
-      background-color: #d734bc;
+      background-color: $purple;
+    }
+
+    &:active {
+      position: relative;
+      top: 1px;
     }
 
   }
+
 }
