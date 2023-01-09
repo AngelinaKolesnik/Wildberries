@@ -1,0 +1,32 @@
+.price {
+	display: flex;
+	align-items: center;
+
+	&__with-discount{
+		@include ffr700;
+		font-size: 16px;
+
+		@media (max-width: 992px) {
+			font-size: 14px;
+		}
+
+		@media (max-width: 576px) {
+			font-size: 12px;
+		}
+	}
+	
+	&__without-discount {
+		text-decoration: line-through;
+		color: $grey;
+		font-size: 14px;
+		@include ffr400;
+
+		@media (max-width: 992px) {
+			font-size: 12px;
+		}
+
+		@media (max-width: 576px) {
+			font-size: 11px;
+		}
+	}
+}
