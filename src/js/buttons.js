@@ -19,3 +19,24 @@ let closePopUpUsingBtn = (btn, background) => {
 	});
 };
 export {closePopUpUsingBtn};
+
+
+//? сердечко
+// let changeState = (collectionOfBtns) => {
+// 	for (let btn of collectionOfBtns) {
+// 		btn.addEventListener('click', (e) => {
+// 			e.classList.toggle('btn--pressed');
+// 		});
+// 	};
+// };
+// export {changeState};
+
+// let changeHeartStyle = (collectionOfBtns) => {
+// 	for (let btn of collectionOfBtns) {
+// 		if (btn.classList.contains('btn--pressed')) {
+// 			btn.style.color = '$purple';
+// 			btn.style.boxShadow = 'none';
+// 		};
+// 	};
+// };
+// export {changeHeartStyle};
