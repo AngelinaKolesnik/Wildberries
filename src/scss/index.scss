@@ -82,25 +82,25 @@
 		right: 13px;
 		width: 24px;
 	}
-	.korzina {
+	.basket {
 		margin: 0;
 		padding: 22px 7px;
 		border: none;
 		background-color: transparent; 
 		&:hover {
-			.korzina__title {
+			.basket__title {
 				color: $white;
 				transition: color .3s ease 0s;
 			}
 		}
 		&:active {
-			.korzina__title {
+			.basket__title {
 				color: $vivid-red;
 			}
 		}
-		.korzina__goods {
+		.basket__goods {
 			display: flex;
-			.korzina__img {
+			.basket__img {
 				display: block;
 				width: 40px;
 				height: 27px;
@@ -140,7 +140,7 @@
 				}
 			}
 		}
-		.korzina__title {
+		.basket__title {
 			font-size: 16px;
 			color: #fff9;
 			@media (max-width:1200px ) {
@@ -152,6 +152,6 @@
 		}
 	}		
 }
-.header__search-btn, .header__search-img, .korzina {
+.header__search-btn, .header__search-img, .basket {
 	cursor: pointer;
 }
