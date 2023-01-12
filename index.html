@@ -5,24 +5,29 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Wildberries</title>
-	<link rel="stylesheet" href="./src/css/index.scss">
+	<link rel="stylesheet" href="./src/scss/index.scss">
 	<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 </head>
 <body>
-	<div class="header">
-		<div class="header_container">
-			<nav class="header_navigation">
-				<img class="header_logo" src="https://static.wbstatic.net/marketing/logo/wb_logo_ny_2022.png" alt="logo">
-				<input id="input-enter" class="header_navigation-search" type="text" placeholder="Введите название товара">
-				<img class="words-search" src="./images/search.svg">
-				<img class="images-search" src="./images/camera.svg" alt="">
-				<button class="basket" type="button">
-					<img class="basket_img" src="./images/basket.svg" alt="basket"></img>
-					<span class="basket_el">Корзина</span>
+	<section class="header">
+		<div class="header__container">
+			<nav class="header__navigation">
+				<img class="header__logo" src="https://static.wbstatic.net/marketing/logo/wb_logo_ny_2022.png" alt="logo">
+				<div id="header-search" class="header__search">
+					<input id="input-enter" class="header__search-input" value="" type="text" placeholder="Введите название товара">
+					<button id="search-words" class="header__search-btn"></button>
+					<img class="header__search-img" src="./img/camera.svg" alt="camera">
+				</div>
+				<button class="korzina" type="button">
+					<div class="korzina__goods">
+						<img class="korzina__img" src="./img/basket.svg" al	t="korzina"></img>
+						<span class="goods-number">0</span>
+					</div>
+					<span class="korzina__title">Корзина</span>	
 				</button>
 			</nav>
 		</div>
-	</div>
+	</section>
 	<script src="./src/js/index.js"></script>
 </body>
 </html>
