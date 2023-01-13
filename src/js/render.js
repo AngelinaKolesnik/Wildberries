@@ -1,7 +1,7 @@
 
 import {createItem, createPreviewOfItem} from './ui';
-import {changeState, changeHeartStyle} from './buttons';
-import {body, btnsHeart, bestsellersList, previewPlace} from './elements_in_DOM';
+import {changeState} from './buttons';
+import {body, previewPlace} from './elements_in_DOM';
 
 //отображение на экране
 export let renderList = (list, place) => {
@@ -12,6 +12,15 @@ export let renderList = (list, place) => {
 		//вставка элемента
 		place.insertAdjacentHTML('beforeend', createItem(list[item], finallyPrice));
 
+		const btnsHeart = document.querySelectorAll('.btn-heart');
+
+		//селекторы дивов в сердечке
+		let firstElement = '.btn-heart__left';
+		let secondElement = '.btn-heart__right';
+
+		//изменение сердечка
+		changeState(Array.from(btnsHeart), firstElement, secondElement);
+		
 		const btnOpenItem = place.querySelector(`button[data-idProduct='${list[item].id}']`);
 
 		//открытие поп-апа (prewiew)
@@ -25,6 +34,10 @@ export let renderList = (list, place) => {
 				previewPlace.innerHTML = '';
 				body.style.overflow = 'auto';
 			});
+			
+			const btnsHeart = document.querySelectorAll('.btn-heart');
+
+			changeState(Array.from(btnsHeart), firstElement, secondElement);
 		});
 	};
 };

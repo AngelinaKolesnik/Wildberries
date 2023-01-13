@@ -1,31 +1,21 @@
-//? сердечко
-let changeState = (arrayOfBtns) => {
+export let changeState = (arrayOfBtns, firstCssClass, secondCssClass) => {
+	
 	for (let btn of arrayOfBtns) {
 		btn.addEventListener('click', (e) => {
+			let firstElement = btn.querySelector(`${firstCssClass}`);
+			let secondElement = btn.querySelector(`${secondCssClass}`);
+
 			e.target.classList.toggle('btn--pressed');
 			
+			if (e.target.classList.contains('btn--pressed')) {
+				btn.style.boxShadow = 'none';
+				firstElement.style.background = '#cb11ab';
+				secondElement.style.background = '#cb11ab';
+			} else {
+				btn.style.boxShadow = '0 0 10px 12px #ffbbf3';
+				firstElement.style.background = '#fff';
+				secondElement.style.background = '#fff';
+			};
 		});
-
-		console.log(btn)
-		// if (e.target.classList.contains('btn--pressed')) {
-		// 	console.log(btn)
-		// 	// btn.style.color = '$purple';
-		// 	btn.style.boxShadow = 'none';
-		// };
-
-		// changeHeartStyle(Array.from(btnsHeart));
 	};
 };
-export {changeState};
-
-let changeHeartStyle = (arrayOfBtns) => {
-	// console.log(arrayOfBtns[0])
-	for (let btn of arrayOfBtns) {
-		if (btn.classList.contains('btn--pressed')) {
-			// console.log(btn)
-			// btn.style.color = '$purple';
-			btn.style.boxShadow = 'none';
-		};
-	};
-};
-export {changeHeartStyle};
