@@ -1,42 +1,31 @@
-import {popUpPreview} from './elements_in_DOM';
-
-//open pop-up
-let openPopUp = (collectionOfBtns, background) => {
-	for (let btn of collectionOfBtns) {
-		btn.addEventListener('click', () => {
-			popUpPreview.style.display = 'flex';
-			background.style.overflow = 'hidden';
+//? сердечко
+let changeState = (arrayOfBtns) => {
+	for (let btn of arrayOfBtns) {
+		btn.addEventListener('click', (e) => {
+			e.target.classList.toggle('btn--pressed');
+			
 		});
+
+		console.log(btn)
+		// if (e.target.classList.contains('btn--pressed')) {
+		// 	console.log(btn)
+		// 	// btn.style.color = '$purple';
+		// 	btn.style.boxShadow = 'none';
+		// };
+
+		// changeHeartStyle(Array.from(btnsHeart));
 	};
 };
-export {openPopUp};
+export {changeState};
 
-//close pop-up
-let closePopUpUsingBtn = (btn, background) => {
-	btn.addEventListener('click', () => {
-		popUpPreview.style.display = 'none';
-		background.style.overflow = 'auto';
-	});
+let changeHeartStyle = (arrayOfBtns) => {
+	// console.log(arrayOfBtns[0])
+	for (let btn of arrayOfBtns) {
+		if (btn.classList.contains('btn--pressed')) {
+			// console.log(btn)
+			// btn.style.color = '$purple';
+			btn.style.boxShadow = 'none';
+		};
+	};
 };
-export {closePopUpUsingBtn};
-
-
-//? сердечко
-// let changeState = (collectionOfBtns) => {
-// 	for (let btn of collectionOfBtns) {
-// 		btn.addEventListener('click', (e) => {
-// 			e.classList.toggle('btn--pressed');
-// 		});
-// 	};
-// };
-// export {changeState};
-
-// let changeHeartStyle = (collectionOfBtns) => {
-// 	for (let btn of collectionOfBtns) {
-// 		if (btn.classList.contains('btn--pressed')) {
-// 			btn.style.color = '$purple';
-// 			btn.style.boxShadow = 'none';
-// 		};
-// 	};
-// };
-// export {changeHeartStyle};
+export {changeHeartStyle};
