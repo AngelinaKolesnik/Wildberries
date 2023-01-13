@@ -1,12 +1,9 @@
 'use strict'
 
-import {body, btnsPreview, btnClosePreview, btnsHeart, bestsellersList, previewPlace} from './elements_in_DOM';
-import {openPopUp, closePopUpUsingBtn, changeState, changeHeartStyle} from './buttons';
+import {bestsellersList} from './elements_in_DOM';
 import {renderList} from './render';
 
-// changeState(Array.from(btnsHeart));
-// changeHeartStyle(Array.from(btnsHeart));
-
+//отображение хитов продаж
 async function getItems() {
 	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods')
 	.then(response => response.json());
@@ -14,7 +11,4 @@ async function getItems() {
 	renderList(content, bestsellersList);
 };
 
-//отображение хитов продаж
 getItems();
-
-

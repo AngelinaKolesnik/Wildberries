@@ -8,7 +8,10 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, 
 
 			<div class="bestsellers__discount">-${discount}%</div>
 
-			<button class="btn-heart"></button>
+			<button class="btn-heart">
+				<div class="btn-heart__left"></div>
+				<div class="btn-heart__right"></div>
+			</button>
 
 			<button class="bestsellers__btn-to-basket">
 				<img src="${cartIcon}" alt="basket">
@@ -59,7 +62,10 @@ export const createPreviewOfItem =
 					</div>
 					<div class="preview__order">
 						<button class="btn-order">Добавить в корзину</button>
-						<button class="btn-heart"></button>
+						<button class="btn-heart">
+							<div class="btn-heart__left"></div>
+							<div class="btn-heart__right"></div>
+						</button>
 					</div>
 				</div>
 			</div>

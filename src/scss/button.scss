@@ -30,8 +30,7 @@ button {
 	width: 12px;
 	border-radius: 50%;
 
-	&::before {
-		content: "";
+	&__left {
 		height: 10px;
 		width: 15px;
 		background: #fff;
@@ -42,8 +41,7 @@ button {
 		transform: rotate(45deg);
 	}
 
-	&::after {
-		content: "";
+	&__right {
 		height: 10px;
 		width: 15px;
 		background: #fff;
@@ -54,8 +52,10 @@ button {
 		transform: rotate(135deg);
 	}
 
-	&:hover::before, &:hover::after {
-		background: $purple;
+	&:hover {
+		.btn-heart__left, .btn-heart__right {
+			background: $purple;
+		}
 	}
 }
 
