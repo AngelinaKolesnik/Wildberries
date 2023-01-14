@@ -24,6 +24,7 @@ body{
 	background: lightblue;
 	height: 100%;
 	position: relative;
+	margin-top: 20px;
 }
 
 .carousel__track{
@@ -77,12 +78,12 @@ body{
 .carousel__indicator{
 	border: 0;
 	border-radius:50%;
-	width: 5px;
-	height: 12px;
-	background: rgba(0,0,0, .3);
+	width: 10px;
+	height: 10px;
+	background: rgb(203 17 171 / 30%);
 	margin: 0 5px;
 }
 
 .carousel__indicator.active{
-	background: rgba(0,0,0, .6)
+	background: rgb(203 17 171);
 }
