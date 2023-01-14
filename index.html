@@ -9,8 +9,26 @@
 	<link rel="stylesheet" href="./src/scss/index.scss">
 	<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 </head>
-
-<body>
+<body>   
+	<section class="header">
+		<div class="header__container">
+			<nav class="header__navigation">
+				<img class="header__logo" src="https://static.wbstatic.net/marketing/logo/wb_logo_ny_2022.png" alt="logo">
+				<div id="header-search" class="header__search">
+					<input id="input-enter" class="header__search-input" value="" type="text" placeholder="Введите название товара">
+					<button id="search-words" class="header__search-btn"></button>
+					<img class="header__search-img" src="./img/camera.svg" alt="camera">
+				</div>
+				<button class="basket" type="button">
+					<span class="basket__wrapper">
+						<img class="basket__img" src="./img/basket.svg" alt="basket"></img>
+						<span class="goods-number">0</span>
+					</span>
+					<span class="basket__title">Корзина</span>	
+				</button>
+			</nav>
+		</div>
+	</section>		
 	<section class="carousel">
 		<div class="carousel__container">
 			<button class="carousel__button carousel__button--left"><img src="/img/arrow/icon-arrow-left.svg"
