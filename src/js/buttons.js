@@ -1,42 +1,21 @@
-import {popUpPreview} from './elements_in_DOM';
+export let changeState = (arrayOfBtns, firstCssClass, secondCssClass) => {
+	
+	for (let btn of arrayOfBtns) {
+		btn.addEventListener('click', (e) => {
+			let firstElement = btn.querySelector(`${firstCssClass}`);
+			let secondElement = btn.querySelector(`${secondCssClass}`);
 
-//open pop-up
-let openPopUp = (collectionOfBtns, background) => {
-	for (let btn of collectionOfBtns) {
-		btn.addEventListener('click', () => {
-			popUpPreview.style.display = 'flex';
-			background.style.overflow = 'hidden';
+			e.target.classList.toggle('btn--pressed');
+			
+			if (e.target.classList.contains('btn--pressed')) {
+				btn.style.boxShadow = 'none';
+				firstElement.style.background = '#cb11ab';
+				secondElement.style.background = '#cb11ab';
+			} else {
+				btn.style.boxShadow = '0 0 10px 12px #ffbbf3';
+				firstElement.style.background = '#fff';
+				secondElement.style.background = '#fff';
+			};
 		});
 	};
 };
-export {openPopUp};
-
-//close pop-up
-let closePopUpUsingBtn = (btn, background) => {
-	btn.addEventListener('click', () => {
-		popUpPreview.style.display = 'none';
-		background.style.overflow = 'auto';
-	});
-};
-export {closePopUpUsingBtn};
-
-
-//? сердечко
-// let changeState = (collectionOfBtns) => {
-// 	for (let btn of collectionOfBtns) {
-// 		btn.addEventListener('click', (e) => {
-// 			e.classList.toggle('btn--pressed');
-// 		});
-// 	};
-// };
-// export {changeState};
-
-// let changeHeartStyle = (collectionOfBtns) => {
-// 	for (let btn of collectionOfBtns) {
-// 		if (btn.classList.contains('btn--pressed')) {
-// 			btn.style.color = '$purple';
-// 			btn.style.boxShadow = 'none';
-// 		};
-// 	};
-// };
-// export {changeHeartStyle};
