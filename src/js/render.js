@@ -1,6 +1,7 @@
 import { createItem, createPreviewOfItem } from './ui';
-import { changeStateForArray, changeStateForElement, changeItem, changeStyle } from './buttons';
+import { changeStateForArray, changeStateForHeart, changeStateForInBasket, changeItem, changeStyle } from './buttons';
 import { body, previewPlace } from './elements_in_DOM';
+import { fetchItems, fetchPreview } from './index';
 
 //отображение на экране
 export let renderListOfBestsellers = (list, place) => {
@@ -25,12 +26,18 @@ export let renderListOfBestsellers = (list, place) => {
 				const btnHeart = previewPlace.querySelector('.btn-heart');
 				const firstElement = btnHeart.querySelector('.btn-heart__left');
 				const secondElement = btnHeart.querySelector('.btn-heart__right');
-			
+
 				//изменение внешнего вида сердечка
 				changeStyle(btnHeart, firstElement, secondElement);
 
 				//изменение значения liked
-				changeStateForElement(btnHeart, list[item].id, list[item].liked);
+				changeStateForHeart(btnHeart, list[item].id, list[item].liked);
+
+				//кнопка корзины
+				const btnBasket = previewPlace.querySelector('.btn-order');
+
+				//изменение значения inBasket
+				changeStateForInBasket(btnBasket, list[item].id, list[item].inBasket);
 
 				//закрытие при нажатии на кнопку
 				previewPlace
@@ -46,23 +53,24 @@ export let renderListOfBestsellers = (list, place) => {
 
 	let buttonsHeart = place.querySelectorAll('.btn-heart');
 	buttonsHeart = Array.from(buttonsHeart);
-	
+
+	console.log(list)
 	for (let btn of buttonsHeart) {
 		// btn.addEventListener('click', () => {
-			// let b = btn.getAttribute('id')
-			// console.log(b, 1, btn.getAttribute('id'))
-			// changeStateForArray(buttonsHeart);
-			changeStateForArray(btn, +btn.getAttribute('id'), btn.dataset.liked)
+		// let b = btn.getAttribute('id')
+		// console.log(b, 1, btn.getAttribute('id'))
+		// changeStateForArray(buttonsHeart);
+		// changeStateForArray(btn, +btn.getAttribute('id'), btn.dataset.liked)
 		// })
 	}
-   //селекторы дивов в сердечке
-   let firstElement = '.btn-heart__left';
-   let secondElement = '.btn-heart__right';
+	//селекторы дивов в сердечке
+	let firstElement = '.btn-heart__left';
+	let secondElement = '.btn-heart__right';
 
-   //изменение сердечка
+	//изменение сердечка
 
 
-	
+
 	// console.log(buttonsHeart[1].getAttribute('id'))
 };
 
@@ -82,6 +90,7 @@ export let renderPreview = (item, place) => {
 		.addEventListener('click', () => {
 			place.innerHTML = '';
 			body.style.overflow = 'auto';
+			fetchItems();
 		});
 
 	//сердечко и его дивы
@@ -91,10 +100,16 @@ export let renderPreview = (item, place) => {
 
 	//изменение внешнего вида сердечка
 	changeStyle(btnHeart, firstElement, secondElement);
-	console.log(item.liked);
+	// console.log(item.liked);
 
 	//изменение значения liked
-	changeStateForElement(btnHeart, item.id, item.liked);
+	changeStateForHeart(btnHeart, item.id, item.liked);
+
+	//кнопка корзины
+	const btnBasket = previewPlace.querySelector('.btn-order');
+
+	//изменение значения inBasket
+	changeStateForInBasket(btnBasket, item.id, item.inBasket);
 };
 
 //отображение на экране
@@ -124,5 +139,5 @@ export let renderBestsellers = (item, place) => {
 	console.log(item.liked);
 
 	//изменение значения liked
-	changeStateForElement(btnHeart, item.id, item.liked);
+	changeStateForHeart(btnHeart, item.id, item.liked);
 };
