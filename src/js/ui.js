@@ -1,16 +1,16 @@
-export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, id}, finallyPrice) => {
+export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, liked, inBasket, id}, finallyPrice) => {
 	return `
 	<div class="bestsellers__item">
 		<div class="bestsellers__wrap">
 			<img class="bestsellers__img" src="${itemPhoto}" alt="product">
 
-			<button data-idProduct='${id}' class="bestsellers__preview-btn preview-btn">Быстрый просмотр</button>
+			<button data-idPreview='${id}' class="bestsellers__preview-btn preview-btn">Быстрый просмотр</button>
 
 			<div class="bestsellers__discount">-${discount}%</div>
 
-			<button class="btn-heart">
+			<button class="btn-heart" data-liked='${liked}' id='${id}'>
 				<div class="btn-heart__left"></div>
-				<div class="btn-heart__right"></div>
+				<div class="btn-heart__right" data-idHeartRight='${id}'></div>
 			</button>
 
 			<button class="bestsellers__btn-to-basket">
@@ -28,8 +28,7 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, 
 	</div>`;
 };
 
-export const createPreviewOfItem = 
-({ name, price, brand, itemPhoto, itemPhoto_2, id}, finallyPrice) => {
+export const createPreviewOfItem = ({ name, price, brand, itemPhoto, itemPhoto_2, liked, inBasket, id}, finallyPrice) => {
 	return `
 	<section class="preview">
 	<div class="container">
@@ -62,7 +61,7 @@ export const createPreviewOfItem =
 					</div>
 					<div class="preview__order">
 						<button class="btn-order">Добавить в корзину</button>
-						<button class="btn-heart">
+						<button class="btn-heart" data-liked='${liked}'>
 							<div class="btn-heart__left"></div>
 							<div class="btn-heart__right"></div>
 						</button>

@@ -1,14 +1,22 @@
 'use strict'
 
-import {bestsellersList} from './elements_in_DOM';
-import {renderList} from './render';
+import {bestsellersList, previewPlace} from './elements_in_DOM';
+import {renderListOfBestsellers, renderPreview} from './render';
 
-//отображение хитов продаж
-async function getItems() {
-	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods')
+//работа с сервером (bestsellers & preview)
+export async function fetchItems() {
+	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/')
 	.then(response => response.json());
 
-	renderList(content, bestsellersList);
+	renderListOfBestsellers(content, bestsellersList);
 };
 
-getItems();
+fetchItems();
+
+//работа с сервером (preview)
+export async function fetchPreview(id) {
+	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/')
+	.then(response => response.json());
+
+	renderPreview(content[id - 1], previewPlace);
+};
