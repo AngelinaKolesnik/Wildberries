@@ -13,7 +13,7 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, 
 				<div class="btn-heart__right" data-idHeartRight='${id}'></div>
 			</button>
 
-			<button class="bestsellers__btn-to-basket">
+			<button class="bestsellers__btn-to-basket" data-inBasket='${inBasket}'>
 				<img src="${cartIcon}" alt="basket">
 			</button>
 		</div>
@@ -60,7 +60,7 @@ export const createPreviewOfItem = ({ name, price, brand, itemPhoto, itemPhoto_2
 						<div class="price__without-discount">${price} p.</div>
 					</div>
 					<div class="preview__order">
-						<button class="btn-order">Добавить в корзину</button>
+						<button class="btn-order" data-inBasket='${inBasket}'>Добавить в корзину</button>
 						<button class="btn-heart" data-liked='${liked}'>
 							<div class="btn-heart__left"></div>
 							<div class="btn-heart__right"></div>

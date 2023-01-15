@@ -1,9 +1,18 @@
 import { fetchItems, fetchPreview } from './index';
 
-export let changeStateForElement = (btn, id, liked) => {
+export let changeStateForHeart = (btn, id, liked) => {
 	btn.addEventListener('click', () => {
 		
 		changeItem(id, liked)
+		// // console.log(11111111, liked)
+		// fetchPreview(id)
+	});
+};
+
+export let changeStateForInBasket = (btn, id, inBasket) => {
+	btn.addEventListener('click', () => {
+		
+		changeInBasket (id, inBasket)
 		// // console.log(11111111, liked)
 		// fetchPreview(id)
 	});
@@ -35,20 +44,21 @@ const changeItem = async (id, liked) => {
 	fetchPreview(id) 
 };
 
-const changeItem1 = async (id, liked) => {
-	// console.log( liked)
+const changeInBasket  = async (id, inBasket ) => {
+	console.log( inBasket)
 		await fetch(`https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/${id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				liked: !liked,
+				inBasket: !inBasket,
 			})
 		})
 		.then(response => response.json());
 		
-		fetchItems() 
+		
+	fetchPreview(id) 
 	};
 
 export const changeStyle = (btn, firstElement, secondElement) => {
