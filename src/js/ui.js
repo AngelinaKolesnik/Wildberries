@@ -10,7 +10,7 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, 
 
 			<button class="btn-heart" data-liked='${liked}' id='${id}'>
 				<div class="btn-heart__left"></div>
-				<div class="btn-heart__right" data-idHeartRight='${id}'></div>
+				<div class="btn-heart__right"></div>
 			</button>
 
 			<button class="bestsellers__btn-to-basket" data-inBasket='${inBasket}'>
