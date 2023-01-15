@@ -2,34 +2,33 @@ import { fetchItems, fetchPreview } from './index';
 
 export let changeStateForHeart = (btn, id, liked) => {
 	btn.addEventListener('click', () => {
-		
-		changeItem(id, liked)
-		// // console.log(11111111, liked)
-		// fetchPreview(id)
+		changeLiked(id, liked);
+	});
+};
+
+export let changeStateForHeartInBestsellers = (btn, id, liked) => {
+	btn.addEventListener('click', () => {
+		console.log(liked)
+		changeLikedInBestsellers(id, liked);
 	});
 };
 
 export let changeStateForInBasket = (btn, id, inBasket) => {
 	btn.addEventListener('click', () => {
-		
-		changeInBasket (id, inBasket)
-		// // console.log(11111111, liked)
-		// fetchPreview(id)
+		changeInBasket (id, inBasket);
 	});
 };
 
-export let changeStateForArray  = (btn, id, liked) => {
-	console.log(liked)
-	btn.addEventListener('click', () => {
-		console.log(btn, id, liked)
-		changeItem(id, liked)
-		fetchItems(id)
-	});
-};
+// export let changeStateForArray  = (btn, id, liked) => {
+// 	btn.addEventListener('click', () => {
+// 		console.log(btn, id, liked)
+// 		changeLiked(id, liked)
+// 		fetchItems(id)
+// 	});
+// };
 
 
-const changeItem = async (id, liked) => {
-// console.log( liked)
+const changeLiked = async (id, liked) => {
 	await fetch(`https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/${id}`, {
 		method: 'PUT',
 		headers: {
@@ -41,7 +40,22 @@ const changeItem = async (id, liked) => {
 	})
 	.then(response => response.json());
 	
-	fetchPreview(id) 
+	fetchPreview(id); 
+};
+
+const changeLikedInBestsellers = async (id, liked) => {
+	await fetch(`https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			liked: !liked,
+		})
+	})
+	.then(response => response.json());
+	
+	fetchItems(); 
 };
 
 const changeInBasket  = async (id, inBasket ) => {
@@ -57,8 +71,7 @@ const changeInBasket  = async (id, inBasket ) => {
 		})
 		.then(response => response.json());
 		
-		
-	fetchPreview(id) 
+		fetchPreview(id);
 	};
 
 export const changeStyle = (btn, firstElement, secondElement) => {
@@ -71,4 +84,4 @@ export const changeStyle = (btn, firstElement, secondElement) => {
 		firstElement.style.background = '#fff';
 		secondElement.style.background = '#fff';
 	};
-}
+};
