@@ -19,17 +19,18 @@
 					<button id="search-words" class="header__search-btn"></button>
 					<img class="header__search-img" src="./img/camera.svg" alt="camera">
 				</div>
-				<button class="basket" type="button">
+				<button class="Btn-basket" type="button" id="btnToBasket">
 					<span class="basket__wrapper">
 						<img class="basket__img" src="./img/basket.svg" alt="basket"></img>
 						<span class="goods-number">0</span>
 					</span>
-					<span class="basket__title">Корзина</span>	
+					<span class="basket__title" id="btnHeadertoBasket">Корзина</span>	
 				</button>
 			</nav>
 		</div>
-	</section>		
-	<section class="carousel">
+	</section>	
+
+	<section class="carousel" id="carousel">
 		<div class="carousel__container">
 			<button class="carousel__button carousel__button--left"><img src="/img/arrow/icon-arrow-left.svg"
 					alt=""></button>
@@ -64,7 +65,7 @@
 		</div>
 	</section>
 
-	<section class="bestsellers">
+	<section class="bestsellers" id="bestsellers">
 		<div class="container">
 			<h2 class="bestsellers__title">Bestsellers</h2>
 			<div class="bestsellers__list"></div>
@@ -73,77 +74,59 @@
 
 	<section class="preview-place"></section>
 
-	<section class="basket">
-		<div class="container">
-			<div class="basket__content">
-				<div class="basket__content-row">
-					<div class="basket__topString">
-						<h2 class="basket__title">Корзина</h2>
-						<button class="basket__btn-deleteAll">Очистить корзину</button>
-					</div>
+	<section class="basket none" id="basket">
+    <div class="container basket__container">
+      <div class="basket__wrap">
 
-					<div class="basket__list">
+        <div class="basket__topString">
+          <h2 class="basket__title">Корзина</h2>
+          <button class="basket__btn-close btn-close"></button>
+        </div>
 
-						<div class="basket__item">
-							<div class="basket__item-img-name">
-								<img class="basket__item-img" src="./src/img/01255600.n_1.png" alt="product"> 
-								<h3 class="basket__item-name">Сгущенка сладкая</h3>
-							</div>
-							<div class="basket__item-price-btnDelete">
-								<div class="basket__with-discount">900 р</div>
-								<div class="basket__without-discount">1000 р</div>
-								<button class="basket__btn-deleteItem">Удалить</button>
-							</div>
-						</div>
+      <div class="basket__content">
+        <div class="basket__content-row">
+          <ul class="basket__list">
 
-						<div class="basket__item">
-							<div class="basket__item-img-name">
-								<img class="basket__item-img" src="./src/img/01255600.n_1.png" alt="product">
-								<h3 class="basket__item-name">Сгущенка сладкая</h3>
-							</div>
-							<div class="basket__item-price-btnDelete">
-								<div class="basket__with-discount">900 р</div>
-								<div class="basket__without-discount">1000 р</div>
-								<button class="basket__btn-deleteItem">Удалить</button>
-							</div>
-						</div>
+            <li class="basket__item">
+              <div class="basket__item-img-name">
+                <img class="basket__item-img" src="./src/img/01255600.n_1.png" alt="product">
+                <h3 class="basket__item-name">Сгущенка сладкая</h3>
+              </div>
+              <div class="basket__item-price-btnDelete">
+                <div class="basket__with-discount">900 р</div>
+                <div class="basket__without-discount">1000 р</div>
+                <button class="basket__btn-deleteItem">Удалить</button>
+              </div>
+            </li>
 
-						<div class="basket__item">
-							<div class="basket__item-img-name">
-								<img class="basket__item-img" src="./src/img/01255600.n_1.png" alt="product">
-								<h3 class="basket__item-name">Сгущенка сладкая</h3>
-							</div>
-							<div class="basket__item-price-btnDelete">
-								<div class="basket__with-discount">900 р</div>
-								<div class="basket__without-discount">1000 р</div>
-								<button class="basket__btn-deleteItem">Удалить</button>
-							</div>
-						</div>
 
-					</div>
+          </ul>
 
-				</div>
+        </div>
 
-				<div class="basket__content-order">
-					<div class="basket__order-top">
-						<h3 class="basket__order-title">Итого:</h3>
-						<div class="basket__order-allPrice">1000$</div>
-					</div>
+        <div class="basket__content-order">
+          <div class="basket__order-top">
+            <h3 class="basket__order-title">Итого:</h3>
+            <div class="basket__order-allPrice">1000$</div>
+          </div>
 
-					<div class="basket__order-adress">
-						<h4 class="basket__order-adress-title">Доставка:</h4>
-						<input class="basket__order-adress-enter" name="adress" placeholder="Мой дом"></input>
-					</div>
+          <div class="basket__order-adress">
+            <h4 class="basket__order-adress-title">Доставка:</h4>
+            <input class="basket__order-adress-enter" name="adress" placeholder="Мой дом"></input>
+          </div>
 
-					<div class="basket__btn-toOrder-wrap">
-						<button class="basket__btn-toOrder btn-order">Заказать</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+          <div class="basket__btn-toOrder-wrap">
+            <button class="basket__btn-toOrder btn-order">Заказать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
 
 	<script src="./src/js/index.js" type='module'></script>
+	
 </body>
 
 </html>

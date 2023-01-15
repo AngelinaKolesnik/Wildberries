@@ -1,4 +1,4 @@
-import { createItem, createPreviewOfItem } from './ui';
+import { createItem, createPreviewOfItem, createItemInBasket } from './ui';
 import { changeStateForArray, changeStateForHeart, changeStateForInBasket, changeItem, changeStyle } from './buttons';
 import { body, previewPlace } from './elements_in_DOM';
 import { fetchItems, fetchPreview } from './index';

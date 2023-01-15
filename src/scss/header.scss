@@ -1,9 +1,9 @@
 $white: #fff;
 $vivid-red: #ff3b30;
-* {
-	margin: auto;
-	padding: 0;
-}
+// * {
+// 	margin: auto;
+// 	padding: 0;
+// }
 .header {
 	font-family: 'Raleway';
 	font-weight: 400;
@@ -83,7 +83,7 @@ $vivid-red: #ff3b30;
 		right: 13px;
 		width: 24px;
 	}
-	.basket {
+	.Btn-basket {
 		display: flex;
 		flex-direction: column;
 		margin: 0;

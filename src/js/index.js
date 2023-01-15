@@ -1,7 +1,7 @@
 'use strict'
-
-import {bestsellersList, previewPlace} from './elements_in_DOM';
-import {renderListOfBestsellers, renderPreview} from './render';
+import {renderBasketList} from './basket';
+import {bestsellersList, previewPlace, basketList} from './elements_in_DOM';
+import {renderListOfBestsellers, renderPreview, renderBasketList} from './render';
 
 //работа с сервером (bestsellers & preview)
 export async function fetchItems() {
@@ -20,3 +20,14 @@ export async function fetchPreview(id) {
 
 	renderPreview(content[id - 1], previewPlace);
 };
+
+
+//работа с сервером (basket)
+export async function fetchBasket() {
+  let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods?inBasket=true')
+  .then(response => response.json());
+ 
+  renderBasketList(content, basketList);
+ };
+
+ fetchBasket();
