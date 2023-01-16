@@ -1,3 +1,6 @@
+// .none {
+//   display: none !important;
+// }
 .basket {
 
   &__title{
@@ -48,9 +51,9 @@
 
   }
 
-  &__list{
+  // &__list{
   
-  }
+  // }
 
   &__item{
     margin-top: 20px;
@@ -89,9 +92,9 @@
     @include ffr400;
 		}
 
-  &__item-price-btnDelete{
+  // &__item-price-btnDelete{
   
-  }
+  // }
 
   &__btn-deleteItem {
     height: 100%;

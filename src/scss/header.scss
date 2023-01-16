@@ -1,21 +1,17 @@
 $white: #fff;
 $vivid-red: #ff3b30;
-* {
-	margin: auto;
-	padding: 0;
-}
 .header {
 	font-family: 'Raleway';
 	font-weight: 400;
 	width: 100%;
-	margin: 0;
 	background-image: url(	https://static.wbstatic.net/marketing/shapkafon2/shapka_line_ny_2022.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
 }
-.header__container {	
+.header__container {
 	max-width: 1400px;
+	margin: auto;
 	padding: 0 15px;	
 	@media (max-width:1200px ) {
 		max-width: 1170px;
@@ -45,6 +41,7 @@ $vivid-red: #ff3b30;
 	}
 	.header__search {
 		position: relative;
+		margin: auto;
 	}
 	.header__search-input {
 		font-size: 18px;
@@ -67,6 +64,7 @@ $vivid-red: #ff3b30;
 	}
 	.header__search-btn {
 		position: absolute;
+		margin: auto;
 		width: 24px;
 		height: 24px;
 		top: 0;
@@ -78,15 +76,15 @@ $vivid-red: #ff3b30;
 	}
 	.header__search-img {
 		position: absolute;
+		margin: auto;
 		top: 0;
 		bottom: 0;
 		right: 13px;
 		width: 24px;
 	}
-	.basket {
+	.btnBasket {
 		display: flex;
 		flex-direction: column;
-		margin: 0;
 		padding: 22px 7px;
 		border: none;
 		background-color: transparent; 
@@ -104,11 +102,12 @@ $vivid-red: #ff3b30;
 		.basket__wrapper {
 			position: relative;
 			display: flex;
+			margin: auto;
 			.basket__img {
 				display: block;
 				width: 40px;
 				height: 27px;
-				margin: 0 2px 5px 0;
+				margin: 0 4px 5px 0;
 				@media (max-width:1200px ) {
 					width: 34px;
 					height: 30px;
@@ -118,7 +117,7 @@ $vivid-red: #ff3b30;
 					width: 28px;
 				}
 			}
-			.goods-number {
+			.goods-count {
 				position: absolute;
 				display: flex;
 				top: -3px;
@@ -147,6 +146,9 @@ $vivid-red: #ff3b30;
 		.basket__title {
 			font-size: 16px;
 			color: #fff9;
+			background-color: transparent;
+			border: none;
+			padding: 0;
 			@media (max-width:1200px ) {
 				font-size: 15px;
 			}
