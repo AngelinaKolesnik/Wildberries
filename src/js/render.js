@@ -1,6 +1,7 @@
-import { createItem } from './ui';
-import { closePopUp, openPopUp, changeLikedInBestsellers, changeLikedInPreview } from './buttons';
-import { popUpPreview, bestsellersList, popUpImgFirst, popUpImgSecond, popUpBrand, popUpName, popUpArticle, popUpInitialPrice, popUpFinallyPrice, btnHeartInDOM } from './elements_in_DOM';
+import { renderBasketList } from './basket';
+import {basketList, popUpPreview} from './elements_in_DOM';
+import {getButtonsWithoutInDOM, renderListOfBestsellers, renderPreview} from './render';
+import { closePopUp } from './buttons';
 
 //отображение на экране
 export function renderListOfBestsellers(list) {
@@ -55,12 +56,13 @@ export function renderListOfBestsellers(list) {
 
 export function renderPreview(item) {
 	openPopUp(popUpPreview);
-	
+
 	//итоговая цена
 	let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
 
 	//установка параметров попапа
-	popUpImgFirst.src = item.itemPhoto;
+	popUpImgFirst.src = list[item].itemPhoto;
+	popUpImgSecond.src = list[item].itemPhoto_2;
 	popUpBrand.innerHTML = `${item.brand} /`;
 	popUpName.innerHTML = item.name;
 	popUpArticle.innerHTML = item.id;
