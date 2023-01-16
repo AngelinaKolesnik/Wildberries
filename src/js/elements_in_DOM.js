@@ -6,6 +6,6 @@ export const previewPlace = document.querySelector('.preview-place');
 
 //basket
 export const basketList = document.querySelector('.basket__list');
-export const basket = document.querySelector('#basket')
+export const basket = document.querySelector('#basket-modal')
 export const btnCloseBasket = document.querySelector('.btn-close')
 export const btnOpenBasket = document.querySelector('#btnToBasket')

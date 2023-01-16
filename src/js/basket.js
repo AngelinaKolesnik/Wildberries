@@ -1,4 +1,4 @@
-import {basket,btnCloseBasket,btnOpenBasket,body, basketList} from './elements_in_DOM';
+import {basket,btnCloseBasket,btnOpenBasket,body, basketList, itemInBasket} from './elements_in_DOM';
 
 
 //откр и закр корзину

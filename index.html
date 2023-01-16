@@ -19,13 +19,15 @@
 					<button id="search-words" class="header__search-btn"></button>
 					<img class="header__search-img" src="./img/camera.svg" alt="camera">
 				</div>
-				<button class="Btn-basket" type="button" id="btnToBasket">
+
+				<div class="btnBasket" id="btnToBasket">
 					<span class="basket__wrapper">
-						<img class="basket__img" src="./img/basket.svg" alt="basket"></img>
-						<span class="goods-number">0</span>
+						<img id="basket-img" class="basket__img" src="./img/basket.svg" alt="basket"></img>
+						<span class="goods-count">0</span>
 					</span>
-					<span class="basket__title" id="btnHeadertoBasket">Корзина</span>	
-				</button>
+					<button class="basket__title" id="basket-title">Корзина</button>	
+				</div>
+
 			</nav>
 		</div>
 	</section>	
@@ -74,7 +76,7 @@
 
 	<section class="preview-place"></section>
 
-	<section class="basket none" id="basket">
+	<section class="basket none" id="basket-modal">
     <div class="container basket__container">
       <div class="basket__wrap">
 
@@ -87,7 +89,7 @@
         <div class="basket__content-row">
           <ul class="basket__list">
 
-            <li class="basket__item">
+            <!-- <li class="basket__item">
               <div class="basket__item-img-name">
                 <img class="basket__item-img" src="./src/img/01255600.n_1.png" alt="product">
                 <h3 class="basket__item-name">Сгущенка сладкая</h3>
@@ -97,9 +99,7 @@
                 <div class="basket__without-discount">1000 р</div>
                 <button class="basket__btn-deleteItem">Удалить</button>
               </div>
-            </li>
-
-
+            </li> -->
           </ul>
 
         </div>
