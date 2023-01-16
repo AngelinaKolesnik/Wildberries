@@ -72,6 +72,6 @@ navIndicate.addEventListener('click', e =>{
     //     nextBtn.classList.add('hidden');
     // } else {
     //     prevBtn.classList.remove('hidden');
-    //     nextBtn.classList.remove('hidden');     //это пока не получается сделать...Это 
+    //     nextBtn.classList.remove('hidden');     //это пока не получается сделать...
     // }
 })
