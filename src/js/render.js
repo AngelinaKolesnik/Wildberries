@@ -54,7 +54,7 @@ export function renderListOfBestsellers(list) {
 
 export function renderPreview(item) {
 	openPopUp(popUpPreview);
-console.log(popUpPreview)
+	
 	//итоговая цена
 	let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
 
