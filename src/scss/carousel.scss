@@ -21,16 +21,20 @@ body{
 }
 
 .carousel__track-container{
-	background: lightblue;
+	background: rgba(157, 13, 133, 0.45);
 	height: 100%;
 	position: relative;
 	margin-top: 20px;
+	overflow: hidden;
 }
 
 .carousel__track{
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	position: relative;
+	height: 100%;
+	transition: transform 250ms  ease-in;
 }
 
 .carousel__slide{
@@ -60,6 +64,12 @@ body{
 		border-radius: 50%;
 }
 }
+
+.carousel__button img:hover{
+	background:rgb(203 17 171);
+	border-radius:50%;
+	transition-duration: .4s;
+ }
 
 .carousel__button--left{
 	left: 10px;
