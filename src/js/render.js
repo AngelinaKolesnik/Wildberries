@@ -1,6 +1,6 @@
 import { createItem } from './ui';
 import { closePopUp, openPopUp, changeLikedInBestsellers, changeLikedInPreview } from './buttons';
-import { popUpPreview, bestsellersList, popUpImg, popUpBrand, popUpName, popUpArticle, popUpInitialPrice, popUpFinallyPrice, btnHeartInDOM } from './elements_in_DOM';
+import { popUpPreview, bestsellersList, popUpImgFirst, popUpImgSecond, popUpBrand, popUpName, popUpArticle, popUpInitialPrice, popUpFinallyPrice, btnHeartInDOM } from './elements_in_DOM';
 
 //отображение на экране
 export function renderListOfBestsellers(list) {
@@ -20,7 +20,8 @@ export function renderListOfBestsellers(list) {
 				openPopUp(popUpPreview);
 
 				//установка параметров попапа
-				popUpImg.src = list[item].itemPhoto;
+				popUpImgFirst.src = list[item].itemPhoto;
+				popUpImgSecond.src = list[item].itemPhoto_2;
 				popUpBrand.innerHTML = `${list[item].brand} /`;
 				popUpName.innerHTML = list[item].name;
 				popUpArticle.innerHTML = list[item].id;
@@ -59,7 +60,7 @@ export function renderPreview(item) {
 	let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
 
 	//установка параметров попапа
-	popUpImg.src = item.itemPhoto;
+	popUpImgFirst.src = item.itemPhoto;
 	popUpBrand.innerHTML = `${item.brand} /`;
 	popUpName.innerHTML = item.name;
 	popUpArticle.innerHTML = item.id;
