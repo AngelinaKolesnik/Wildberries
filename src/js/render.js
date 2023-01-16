@@ -1,143 +1,123 @@
-import { createItem, createPreviewOfItem, createItemInBasket } from './ui';
-import { changeStateForArray, changeStateForHeart, changeStateForInBasket, changeItem, changeStyle } from './buttons';
-import { body, previewPlace } from './elements_in_DOM';
-import { fetchItems, fetchPreview } from './index';
+import { createItem } from './ui';
+import { closePopUp, openPopUp, changeLikedInBestsellers, changeLikedInPreview } from './buttons';
+import { popUpPreview, bestsellersList, popUpImg, popUpBrand, popUpName, popUpArticle, popUpInitialPrice, popUpFinallyPrice, btnHeartInDOM } from './elements_in_DOM';
 
 //отображение на экране
-export let renderListOfBestsellers = (list, place) => {
-	place.innerHTML = ''
+export function renderListOfBestsellers(list) {
+	bestsellersList.innerHTML = '';
 
 	for (let item in list) {
 		//итоговая цена
 		let finallyPrice = (list[item].price * (100 - list[item].discount) / 100).toFixed(2);
 
 		//вставка элемента
-		place.insertAdjacentHTML('beforeend', createItem(list[item], finallyPrice));
+		bestsellersList.insertAdjacentHTML('beforeend', createItem(list[item], finallyPrice));
 
-		//preview
-		place
+		//открытие попапа
+		bestsellersList
 			.querySelector(`button[data-idPreview='${list[item].id}']`)
 			.addEventListener('click', () => {
-				//отображение preview
-				previewPlace.innerHTML = createPreviewOfItem(list[item], finallyPrice);
-				body.style.overflow = 'hidden';
+				openPopUp(popUpPreview);
 
-				//сердечко и его дивы
-				const btnHeart = previewPlace.querySelector('.btn-heart');
-				const firstElement = btnHeart.querySelector('.btn-heart__left');
-				const secondElement = btnHeart.querySelector('.btn-heart__right');
+				//установка параметров попапа
+				popUpImg.src = list[item].itemPhoto;
+				popUpBrand.innerHTML = `${list[item].brand} /`;
+				popUpName.innerHTML = list[item].name;
+				popUpArticle.innerHTML = list[item].id;
+				popUpInitialPrice.innerHTML = `${list[item].price} $`;
+				popUpFinallyPrice.innerHTML = `${finallyPrice} $`;
+				btnHeartInDOM.dataset.liked = `${list[item].liked}`;
+				btnHeartInDOM.dataset.idHeart = `${list[item].id}`;
 
-				//изменение внешнего вида сердечка
-				changeStyle(btnHeart, firstElement, secondElement);
+				//изменение сердечка
+				changeBtnHeart(btnHeartInDOM);
+				let btnId = btnHeartInDOM.getAttribute('id') ?? btnHeartInDOM.dataset.idHeart;
+				let btnLiked;
 
-				//изменение значения liked
-				changeStateForHeart(btnHeart, list[item].id, list[item].liked);
+				if (btnHeartInDOM.dataset.liked == 'true') {
+					btnLiked = true;
+				} else {
+					btnLiked = false;
+				};
 
-				//кнопка корзины
-				const btnBasket = previewPlace.querySelector('.btn-order');
-
-				//изменение значения inBasket
-				changeStateForInBasket(btnBasket, list[item].id, list[item].inBasket);
-
-				//закрытие при нажатии на кнопку
-				previewPlace
-					.querySelector(`button[data-idClose='${list[item].id}']`)
-					.addEventListener('click', () => {
-						previewPlace.innerHTML = '';
-						body.style.overflow = 'auto';
-						fetchItems() //!
-					});
-
+				btnHeartInDOM.addEventListener('click', () => {
+					changeLikedInPreview(btnId, btnLiked)
+				})
 			});
+
+		//закрытие попапа	
+		popUpPreview
+			.querySelector('.preview__btn-close')
+			.addEventListener('click', () => closePopUp(popUpPreview));
 	};
+};
 
-	let buttonsHeart = place.querySelectorAll('.btn-heart');
-	buttonsHeart = Array.from(buttonsHeart);
+export function renderPreview(item) {
+	openPopUp(popUpPreview);
+	
+	//итоговая цена
+	let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
 
-	console.log(list)
-	for (let btn of buttonsHeart) {
-		// btn.addEventListener('click', () => {
-		// let b = btn.getAttribute('id')
-		// console.log(b, 1, btn.getAttribute('id'))
-		// changeStateForArray(buttonsHeart);
-		// changeStateForArray(btn, +btn.getAttribute('id'), btn.dataset.liked)
-		// })
-	}
-	//селекторы дивов в сердечке
-	let firstElement = '.btn-heart__left';
-	let secondElement = '.btn-heart__right';
+	//установка параметров попапа
+	popUpImg.src = item.itemPhoto;
+	popUpBrand.innerHTML = `${item.brand} /`;
+	popUpName.innerHTML = item.name;
+	popUpArticle.innerHTML = item.id;
+	popUpInitialPrice.innerHTML = `${item.price} $`;
+	popUpFinallyPrice.innerHTML = `${finallyPrice} $`;
+	btnHeartInDOM.dataset.liked = `${item.liked}`;
+	btnHeartInDOM.dataset.idHeart = `${item.id}`;
 
 	//изменение сердечка
+	changeBtnHeart(btnHeartInDOM);
+	let btnId = btnHeartInDOM.getAttribute('id') ?? btnHeartInDOM.dataset.idHeart;
+	let btnLiked;
 
+	if (btnHeartInDOM.dataset.liked == 'true') {
+		btnLiked = true;
+	} else {
+		btnLiked = false;
+	};
+	btnHeartInDOM.addEventListener('click', () => {
+		changeLikedInPreview(btnId, btnLiked)
+	})
 
-
-	// console.log(buttonsHeart[1].getAttribute('id'))
+	//закрытие попапа	
+	popUpPreview
+		.querySelector('.preview__btn-close')
+		.addEventListener('click', () => closePopUp(popUpPreview));
 };
 
+export function getButtonsWithoutInDOM() {
+	let btnsHeart = Array.from(document.querySelectorAll('.btn-heart')).splice(1);
 
-//отображение на экране
-export let renderPreview = (item, place) => {
-	//итоговая цена
-	let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
+	btnsHeart.forEach((btn) => {
+		changeBtnHeart(btn);
+		let btnId = btn.getAttribute('id') ?? btn.dataset.idHeart;
+		let btnLiked;
 
-	//отображение preview
-	place.innerHTML = createPreviewOfItem(item, finallyPrice);
-	body.style.overflow = 'hidden';
-
-	//закрытие при нажатии на кнопку
-	place
-		.querySelector(`button[data-idClose='${item.id}']`)
-		.addEventListener('click', () => {
-			place.innerHTML = '';
-			body.style.overflow = 'auto';
-			fetchItems();
+		if (btn.dataset.liked == 'true') {
+			btnLiked = true;
+		} else {
+			btnLiked = false;
+		};
+		btn.addEventListener('click', () => {
+			changeLikedInBestsellers(btnId, btnLiked)
 		});
-
-	//сердечко и его дивы
-	const btnHeart = place.querySelector('.btn-heart');
-	const firstElement = btnHeart.querySelector('.btn-heart__left');
-	const secondElement = btnHeart.querySelector('.btn-heart__right');
-
-	//изменение внешнего вида сердечка
-	changeStyle(btnHeart, firstElement, secondElement);
-	// console.log(item.liked);
-
-	//изменение значения liked
-	changeStateForHeart(btnHeart, item.id, item.liked);
-
-	//кнопка корзины
-	const btnBasket = previewPlace.querySelector('.btn-order');
-
-	//изменение значения inBasket
-	changeStateForInBasket(btnBasket, item.id, item.inBasket);
+	});
 };
 
-//отображение на экране
-export let renderBestsellers = (item, place) => {
-	//итоговая цена
-	let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
+export function changeBtnHeart(btn) {
+	const btnHeartLeft = btn.querySelector('.btn-heart__left');
+	const btnHeartRight = btn.querySelector('.btn-heart__right');
 
-	//отображение preview
-	place.innerHTML = createPreviewOfItem(item, finallyPrice);
-	body.style.overflow = 'hidden';
-
-	//закрытие при нажатии на кнопку
-	place
-		.querySelector(`button[data-idClose='${item.id}']`)
-		.addEventListener('click', () => {
-			place.innerHTML = '';
-			body.style.overflow = 'auto';
-		});
-
-	//сердечко и его дивы
-	const btnHeart = place.querySelector('.btn-heart');
-	const firstElement = btnHeart.querySelector('.btn-heart__left');
-	const secondElement = btnHeart.querySelector('.btn-heart__right');
-
-	//изменение внешнего вида сердечка
-	changeStyle(btnHeart, firstElement, secondElement);
-	console.log(item.liked);
-
-	//изменение значения liked
-	changeStateForHeart(btnHeart, item.id, item.liked);
+	if (btn.dataset.liked == 'true') {
+		btn.classList.add('btn-heart--success');
+		btnHeartLeft.classList.add('btn-heart__left--success');
+		btnHeartRight.classList.add('btn-heart__right--success');
+	} else {
+		btn.classList.remove('btn-heart--success');
+		btnHeartLeft.classList.remove('btn-heart__left--success');
+		btnHeartRight.classList.remove('btn-heart__right--success');
+	};
 };

@@ -38,7 +38,7 @@
 					alt=""></button>
 			<div class="carousel__track-container">
 				<ul class="carousel__track">
-					<li class="carousel__slide">
+					<li class="carousel__slide active">
 						<img class="carousel__image" src="./img/slides/slide1.jpg" alt="New Year's sale! Discount up to -90%">
 					</li>
 
@@ -67,7 +67,53 @@
 		</div>
 	</section>
 
-	<section class="bestsellers" id="bestsellers">
+	<section class="preview none">
+		<div class="container">
+			<div class="preview__carousel">
+				<button class="arrow arrow--prev">
+					<div class="arrow__line"></div>
+				</button>
+	
+				<div class="preview__wrap">
+					<div class="preview__slider-img">
+						<img class="preview__img" alt="">
+						<button class="arrow arrow--prev">
+							<div class="arrow__line"></div>
+						</button>
+						<button class="arrow arrow--next">
+							<div class="arrow__line"></div>
+						</button>
+					</div>
+	
+					<div class="preview__content">
+						<button class="preview__btn-close btn-close"></button>
+						<p class="preview__goods-description">
+							<span class="preview__goods-brand"></span>
+							<span class="preview__goods-name"></span>
+						</p>
+						<div class="preview__item-number">Артикул: <span class="preview__article"></span></div>
+						<div class="price">
+							<div class="price__with-discount"></div>
+							<div class="price__without-discount"></div>
+						</div>
+						<div class="preview__order">
+							<button class="btn-order" data-inBasket=''>Добавить в корзину</button>
+							<button class="btn-heart">
+								<div class="btn-heart__left"></div>
+								<div class="btn-heart__right"></div>
+							</button>
+						</div>
+					</div>
+				</div>
+	
+				<button class="arrow arrow--next">
+					<div class="arrow__line"></div>
+				</button>
+			</div>
+		</div>
+		</section>
+
+	<section class="bestsellers">
 		<div class="container">
 			<h2 class="bestsellers__title">Bestsellers</h2>
 			<div class="bestsellers__list"></div>
@@ -126,6 +172,7 @@
 
 
 	<script src="./src/js/index.js" type='module'></script>
+	<script src="./src/js/carousel.js"></script>
 	
 </body>
 
