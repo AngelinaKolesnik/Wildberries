@@ -20,13 +20,21 @@ const moveToSlide = (track,currentSlide,targetSlide) => {
     targetSlide.classList.add('active');
 }
 
+const updateToDots = (currentDot,targetDot) => {
+    currentDot.classList.remove('active'); 
+    targetDot.classList.add('active');       //активный индикатор меняет цвет                 
+}  
+
 //клик влево - переход слайда влево
 
 prevBtn.addEventListener('click', e => {
     const currentSlide = track.querySelector('.active');
     const prevSlide = currentSlide.previousElementSibling;
+    const currentDot = navIndicate.querySelector('.active'); //переключение активного инкатора при нажатии на стрелку влево
+    const prevDot = currentDot.previousElementSibling;
     
-    moveToSlide(track,currentSlide,prevSlide)
+    moveToSlide(track,currentSlide,prevSlide);
+    updateToDots(currentDot,prevDot);
 })
 
 //клик вправо - переход слайда вправо
@@ -34,8 +42,11 @@ prevBtn.addEventListener('click', e => {
 nextBtn.addEventListener('click', e => {
     const currentSlide = track.querySelector('.active');
     const nextSlide = currentSlide.nextElementSibling;
-    
+    const currentDot = navIndicate.querySelector('.active'); //переключение активного инкатора при нажатии на стрелку вправо
+    const nextDot = currentDot.nextElementSibling;
+
     moveToSlide(track,currentSlide,nextSlide)
+    updateToDots(currentDot,nextDot);
 })
 
 //клик на индикатор, переход к слайду
@@ -51,5 +62,16 @@ navIndicate.addEventListener('click', e =>{
     const targetSlide = slides[targetIndex];
 
     moveToSlide(track,currentSlide,targetSlide);
+    updateToDots(currentDot,targetDot);
 
+    // if(targetIndex === 0){
+    //     prevBtn.classList.add('hidden');
+    //     nextBtn.classList.remove('hidden');
+    // } else if (targetIndex === slides.length-1){
+    //     prevBtn.classList.remove('hidden');
+    //     nextBtn.classList.add('hidden');
+    // } else {
+    //     prevBtn.classList.remove('hidden');
+    //     nextBtn.classList.remove('hidden');     //это пока не получается сделать...Это 
+    // }
 })
