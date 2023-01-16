@@ -1,7 +1,6 @@
-import { renderBasketList } from './basket';
-import {basketList, popUpPreview} from './elements_in_DOM';
-import {getButtonsWithoutInDOM, renderListOfBestsellers, renderPreview} from './render';
-import { closePopUp } from './buttons';
+import { createItem } from './ui';
+import { closePopUp, openPopUp, changeLikedInBestsellers, changeLikedInPreview } from './buttons';
+import { popUpPreview, bestsellersList, popUpImgFirst, popUpImgSecond, popUpBrand, popUpName, popUpArticle, popUpInitialPrice, popUpFinallyPrice, btnHeartInDOM } from './elements_in_DOM';
 
 //отображение на экране
 export function renderListOfBestsellers(list) {
