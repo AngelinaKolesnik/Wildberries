@@ -1,8 +1,8 @@
 'use strict'
 
-import { popUpPreview } from './elements_in_DOM';
-import { renderListOfBestsellers, renderPreview, getButtonsWithoutInDOM } from './render';
-import { closePopUp } from './buttons';
+import { renderBasketList } from './basket';
+import {basketList, bestsellersList, previewPlace} from './elements_in_DOM';
+import {getButtonsWithoutInDOM, renderListOfBestsellers, renderPreview} from './render';
 
 //работа с сервером (bestsellers & preview)
 export async function fetchItemsInBestsellers() {
@@ -33,3 +33,14 @@ export async function updateItemInPreview(id) {
 		.then(renderPreview(content[id - 1]))
 		.then(getButtonsWithoutInDOM());
 };
+
+
+//работа с сервером (basket)
+export async function fetchBasket() {
+  let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods?inBasket=true')
+  .then(response => response.json());
+ 
+  renderBasketList(content, basketList);
+ };
+
+ fetchBasket();

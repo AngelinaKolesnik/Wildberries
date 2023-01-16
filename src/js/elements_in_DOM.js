@@ -10,3 +10,9 @@ export const popUpArticle = document.querySelector('.preview__article');
 export const popUpInitialPrice = document.querySelector('.price__with-discount');
 export const popUpFinallyPrice = document.querySelector('.price__without-discount');
 export const btnHeartInDOM = document.querySelector('.btn-heart');
+
+//basket
+export const basketList = document.querySelector('.basket__list');
+export const basket = document.querySelector('#basket-modal')
+export const btnCloseBasket = document.querySelector('.btn-close-basket')
+export const btnOpenBasket = document.querySelector('#btnToBasket')
