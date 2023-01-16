@@ -14,5 +14,5 @@ export const btnHeartInDOM = document.querySelector('.btn-heart');
 //basket
 export const basketList = document.querySelector('.basket__list');
 export const basket = document.querySelector('#basket-modal')
-export const btnCloseBasket = document.querySelector('.btn-close')
+export const btnCloseBasket = document.querySelector('.btn-close-basket')
 export const btnOpenBasket = document.querySelector('#btnToBasket')

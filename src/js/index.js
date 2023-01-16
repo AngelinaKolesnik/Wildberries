@@ -1,7 +1,8 @@
 'use strict'
 
-import {bestsellersList, previewPlace} from './elements_in_DOM';
-import {renderListOfBestsellers, renderPreview} from './render';
+import { renderBasketList } from './basket';
+import {basketList, bestsellersList, previewPlace} from './elements_in_DOM';
+import {getButtonsWithoutInDOM, renderListOfBestsellers, renderPreview} from './render';
 
 //работа с сервером (bestsellers & preview)
 export async function fetchItemsInBestsellers() {
