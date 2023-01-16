@@ -39,6 +39,10 @@ button {
 		position: absolute;
 		inset: 0 0 0px -4px;
 		transform: rotate(45deg);
+
+		&--success {
+			background: $purple !important;
+		}
 	}
 
 	&__right {
@@ -50,12 +54,20 @@ button {
 		position: absolute;
 		inset: 0 -4px 0px 0;
 		transform: rotate(135deg);
+
+		&--success {
+			background: $purple !important;
+		}
 	}
 
 	&:hover {
 		.btn-heart__left, .btn-heart__right {
 			background: $purple;
 		}
+	}
+
+	&--success {
+		box-shadow: none !important;
 	}
 }
 
