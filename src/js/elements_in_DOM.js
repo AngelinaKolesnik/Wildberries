@@ -16,3 +16,5 @@ export const basketList = document.querySelector('.basket__list');
 export const basket = document.querySelector('#basket-modal')
 export const btnCloseBasket = document.querySelector('.btn-close-basket')
 export const btnOpenBasket = document.querySelector('#btnToBasket')
+export const btnDeleteItem = document.querySelector('#btnDeleteItem')
+
