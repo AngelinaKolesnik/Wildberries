@@ -1,47 +1,53 @@
 'use strict'
 
 import { renderBasketList } from './basket';
+<<<<<<< HEAD
 import {basketList, bestsellersList, previewPlace} from './elements_in_DOM';
 import {getButtonsWithoutInDOM, renderListOfBestsellers, renderPreview} from './render';
 import {} from './basket'
+=======
+import { basketList } from './elements_in_DOM';
+import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods } from './bestsellers';
+import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
+>>>>>>> main
 
-//работа с сервером (bestsellers & preview)
+//сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
+let itemsInBasket = []
+
+//работа с сервером (mockapi)
 export async function fetchItemsInBestsellers() {
 	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/')
 		.then(response => response.json());
 
-	const renderProducts = new Promise((resolve, reject) => {
-		resolve(renderListOfBestsellers(content))
+	const renderProducts = new Promise((res, rej) => {
+		res(renderListOfBestsellers(content))
 	});
-
 	renderProducts
-		.then(getButtonsWithoutInDOM());
+		.then(getButtonsHeartInBestsellers())
+		.then(addToBasket());
 };
 
-//вызывается, чтоб на странице отобразилась информация
-fetchItemsInBestsellers()
-
-export async function updateItemInPreview(id) {
-	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/')
-		.then(response => response.json());
-
-	const renderProducts = new Promise((resolve, reject) => {
-		resolve(renderListOfBestsellers(content))
-	});
-
-	renderProducts
-		.then(closePopUp(popUpPreview))
-		.then(renderPreview(content[id - 1]))
-		.then(getButtonsWithoutInDOM());
+//получение данных из LocalStorage
+function getDataFromLocalStorage (key) {
+	if (!itemsInBasket.length && localStorage.getItem(key)) {
+		itemsInBasket = JSON.parse(localStorage.getItem(key));
+	};
 };
 
+getDataFromLocalStorage(IN_BASKET_KEY);
+
+//выведение общего кол-ва товаров в хедер (в значок)
+getQuantityOfGoods(IN_BASKET_KEY);
+
+// вызывается, чтоб информация отобразилась на странице
+fetchItemsInBestsellers();
 
 //работа с сервером (basket)
 export async function fetchBasket() {
-  let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods?inBasket=true')
-  .then(response => response.json());
- 
-  renderBasketList(content, basketList);
- };
+	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods?inBasket=true')
+		.then(response => response.json());
 
- fetchBasket();
+	renderBasketList(content, basketList);
+};
+
+fetchBasket();

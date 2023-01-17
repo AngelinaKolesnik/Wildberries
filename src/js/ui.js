@@ -1,6 +1,6 @@
-export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, liked, inBasket, id }, finallyPrice) => {
+export const createItem = ({ name, price, brand, discount, itemPhoto, id }, finallyPrice) => {
 	return `
-	<div class="bestsellers__item">
+	<li class="bestsellers__item">
 		<div class="bestsellers__wrap">
 			<img class="bestsellers__img" src="${itemPhoto}" alt="product">
 
@@ -8,13 +8,12 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, 
 
 			<div class="bestsellers__discount">-${discount}%</div>
 
-			<button class="btn-heart" data-liked='${liked}' id='${id}'>
+			<button class="btn-heart btn-heart--${id}" data-idBtnHeart='${id}'>
 				<div class="btn-heart__left"></div>
 				<div class="btn-heart__right"></div>
 			</button>
 
-			<button class="bestsellers__btn-to-basket" data-inBasket='${inBasket}'>
-				<img src="${cartIcon}" alt="basket">
+			<button class="bestsellers__btn-order">
 			</button>
 		</div>
 
@@ -25,5 +24,5 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, cartIcon, 
 
 		<h3 class="bestsellers__brand">${brand}</h3>
 		<h3 class="bestsellers__name">${name}</h3>
-	</div>`;
+	</li>`;
 };
