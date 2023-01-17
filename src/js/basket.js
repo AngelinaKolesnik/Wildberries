@@ -21,9 +21,9 @@ function closeBasket (){
 //добавляем товары в корзину, у которых inBasket - true
 
 export let renderBasketList = (list, place) => {
-  console.log(list);
+//   console.log(list);
   for (let item in list) {
-    console.log(list[item])
+   //  console.log(list[item])
     let finallyPrice = (list[item].price * (100 - list[item].discount) / 100).toFixed(2);
     place.insertAdjacentHTML('beforeend', createItemInBasket(list[item], finallyPrice))
   }
