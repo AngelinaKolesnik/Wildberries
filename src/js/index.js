@@ -1,15 +1,9 @@
 'use strict'
 
 import { renderBasketList } from './basket';
-<<<<<<< HEAD
-import {basketList, bestsellersList, previewPlace} from './elements_in_DOM';
-import {getButtonsWithoutInDOM, renderListOfBestsellers, renderPreview} from './render';
-import {} from './basket'
-=======
 import { basketList } from './elements_in_DOM';
 import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods } from './bestsellers';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
->>>>>>> main
 
 //сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
 let itemsInBasket = []
