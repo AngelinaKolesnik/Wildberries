@@ -6,7 +6,7 @@ import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, get
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
 //сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
-let itemsInBasket = []
+let itemsInBasket = {};
 
 //работа с сервером (mockapi)
 export async function fetchItemsInBestsellers() {

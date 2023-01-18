@@ -1,6 +1,6 @@
 import { createItem } from './ui';
-import { closePopUp, openPopUp } from './buttons';
-import { popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, previewBrand, previewName, previewArticle, previewInitialPrice, previewFinallyPrice, btnHeartInPreview, btnOrderInPreview, goodsCounterInHeader } from './elements_in_DOM';
+import { closePopUp, openPopUp, changeBtn } from './buttons';
+import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, previewBrand, previewName, previewArticle, previewInitialPrice, previewFinallyPrice, btnHeartInPreview, btnOrderInPreview, goodsCounterInHeader, btnOpenBasketInPreview } from './elements_in_DOM';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
 //отображение на экране
@@ -37,43 +37,54 @@ export function renderListOfBestsellers(list) {
 				btnHeartInPreview.classList.add(`btn-heart--${list[item].id}`);
 				btnOrderInPreview.setAttribute('id', `${list[item].id}-btnToOrderInPreview`);
 
-				let btnOrderId = parseInt(btnOrderInPreview.getAttribute('id'));
+				// btnOrderInPreview.addEventListener('click', changeBtn(btnOrderInPreview, btnOpenBasketInPreview));
 
+				let btnOrderId = parseInt(btnOrderInPreview.getAttribute('id'));
 
 				addToLocalStorage(btnOrderInPreview, btnOrderId, IN_BASKET_KEY);
 
-
 				if (btnHeartInItem.classList.contains(`btn-heart--${list[item].id}`) == btnHeartInPreview.classList.contains(`btn-heart--${list[item].id}`) && btnHeartInItem.classList.contains('btn-heart--success')) {
-					// const btnHeartLeft = btnHeartInPreview.querySelector('.btn-heart__left');
-					// const btnHeartRight = btnHeartInPreview.querySelector('.btn-heart__right');
-
-					// btnHeartInPreview.classList.add('btn-heart--success');
-					// btnHeartLeft.classList.add('btn-heart__left--success');
-					// btnHeartRight.classList.add('btn-heart__right--success');
 					changeStyleAdd(btnHeartInPreview);
 
 				} else if (btnHeartInItem.classList.contains(`btn-heart--${list[item].id}`) == btnHeartInPreview.classList.contains(`btn-heart--${list[item].id}`) && !btnHeartInItem.classList.contains('btn-heart--success')) {
-					// const btnHeartLeft = btnHeartInPreview.querySelector('.btn-heart__left');
-					// const btnHeartRight = btnHeartInPreview.querySelector('.btn-heart__right');
-
-					// btnHeartInPreview.classList.remove('btn-heart--success');
-					// btnHeartLeft.classList.remove('btn-heart__left--success');
-					// btnHeartRight.classList.remove('btn-heart__right--success');
 					changeStyleRemove(btnHeartInPreview);
 				};
+
+				btnOpenBasketInPreview.addEventListener('click', () => {
+					closePopUp(popUpPreview);
+					changeBtn(btnOpenBasketInPreview, btnOrderInPreview);
+					clearParams(list[item].id);
+					openPopUp(basket);
+				})
 			});
 
 		//закрытие попапа	
 		popUpPreview
 			.querySelector('.preview__btn-close')
-			.addEventListener('click', () => closePopUp(popUpPreview));
+			.addEventListener('click', () => {
+				closePopUp(popUpPreview);
+				changeBtn(btnOpenBasketInPreview, btnOrderInPreview);
+				clearParams(list[item].id);
+			});
 	};
+};
+
+export function clearParams(id) {
+	previewImgFirst.src = '';
+	previewImgSecond.src = '';
+	previewBrand.innerHTML = '';
+	previewName.innerHTML = '';
+	previewArticle.innerHTML = '';
+	previewInitialPrice.innerHTML = '';
+	previewFinallyPrice.innerHTML = '';
+	btnHeartInPreview.classList.remove(`btn-heart--${id}`);
+	btnOrderInPreview.removeAttribute('id');
 };
 
 export function addToBasket() {
 	//находим все кнопки "добавить в корзину" в бестселлерах
 	const btnsOrderInBestsellers = Array.from(bestsellersList.querySelectorAll('.bestsellers__btn-order'));
-
+console.log(btnsOrderInBestsellers)
 	for (let btn in btnsOrderInBestsellers) {
 		//ключ элемент в array, т.к. id начинаются с 1, а btn с 0
 		let id = +btn + 1;
@@ -84,7 +95,7 @@ export function addToBasket() {
 
 export function addToLocalStorage(btn, id, key) {
 	btn.addEventListener('click', () => {
-		let array = [];
+		let array;
 
 		//проверка наличия чего-нибудь в LocalStorage
 		if (localStorage.getItem(key)) {
@@ -93,7 +104,7 @@ export function addToLocalStorage(btn, id, key) {
 			//без этого условия, если из LocalStorage ничего не приходит, первый элемент будет null
 			array = {};
 		};
-
+ 
 		//значение ключа в array
 		if (array[id]) {
 			array[id] += 1;
@@ -120,9 +131,6 @@ export function getQuantityOfGoods(key) {
 	//выведение общего кол-ва товаров в хедер (в значок)
 		goodsCounterInHeader.innerText = quantity;
 };
-
-
-
 
 export function getButtonsHeartInBestsellers() {
 	let btnsHeart = Array.from(bestsellersList.querySelectorAll('.btn-heart'));

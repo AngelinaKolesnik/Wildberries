@@ -14,6 +14,7 @@ export const previewInitialPrice = document.querySelector('.price__with-discount
 export const previewFinallyPrice = document.querySelector('.price__without-discount');
 export const btnHeartInPreview = document.querySelector('.btn-heart');
 export const btnOrderInPreview = document.querySelector('.preview__btn-order');
+export const btnOpenBasketInPreview = document.querySelector('.preview__btn-open-basket');
 
 //basket
 export const basketList = document.querySelector('.basket__list');

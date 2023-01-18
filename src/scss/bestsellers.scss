@@ -63,6 +63,11 @@
 			top: 10px;
 			right: 10px;
 			box-shadow: 0 0 7px 8px $soft-purple;
+
+			&:hover {
+				transform: scale(1.08);
+				transition: .3s;
+			}
 		}
 	}
 
@@ -119,7 +124,9 @@
 		}
 
 		&:hover {
-			background: rgb(255, 255, 255);
+			background: $white;
+			transform: scale(1.05);
+			transition: .3s;
 		}
 	}
 
@@ -159,7 +166,10 @@
 		}
 
 		&:hover {
-			opacity: 1;
+			opacity: 1;	&:hover {
+				transform: scale(1.08);
+				transition: .3s;
+			}
 		}
 
 		&::before {
