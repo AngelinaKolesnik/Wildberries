@@ -2,6 +2,19 @@
   display: none !important;
 }
 
+//чтобы убрать стрелки, которые появлются на quantity
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; // Yeah, yeah everybody write about it
+    }
+
+    input[type='number'],
+    input[type="number"]:hover,
+    input[type="number"]:focus {
+        appearance: none;
+        -moz-appearance: textfield;
+    }
+
 
 .basket {
   position: fixed;
@@ -15,10 +28,27 @@
 	align-items: center;
 	background-color: rgba(0, 0, 0, .3);
 	display: flex;
+  overflow-y: scroll;
+
+  /* полоса прокрутки (скроллбар) */
+  ::-webkit-scrollbar {
+  width: 8px; /* ширина для вертикального скролла */
+  background-color: #fff;
+  }
+
+/* ползунок скроллбара */
+  ::-webkit-scrollbar-thumb {
+  background-color: rgba(203, 17, 171, .5);
+  border-radius: 9em;
+  box-shadow: inset 1px 1px 10px #f3faf7;
+  }
 
   &__container{
     z-index: 2;
-    height: 600px;
+    max-height: 580px;
+    height: 100%;
+    max-width: 1200px !important;
+    width: 100%;
   }
 
   &__title{
@@ -33,10 +63,15 @@
 
   &__content {
     display: flex;
+    padding: 20px;
+
+    @media (max-width: 950px) {
+			flex-direction: column;
+		}
   }
 
   &__topString{
-    padding: 25px;
+    padding: 20px 25px 0 25px;
     display: flex;
     justify-content: space-between;
   }
@@ -50,7 +85,7 @@
     width: 100%;
     height: 500px;
     border-radius: 10px;
-    padding: 25px;
+    padding-right: 25px;
     margin-right: 20px;
     display: flex;
     flex-direction: column;
@@ -82,15 +117,15 @@
 
   }
 
-  // &__list{
-  
-  // }
+  &__list{
+    padding: 0;
+  }
 
   &__item{
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    height: 110px;
   }
 
   &__item:first-child{
@@ -101,24 +136,83 @@
     display: flex;
 		margin: auto;
     object-fit: cover;
-    max-width: 80px;
-    width: 100%;
-		max-height: 100px;
+    width: 90px;
+    // width: 100%;
+		max-height: 110px;
     height: 100%;
+    border-radius: 8px;
   }
 
   &__item-img-name{
     display: flex;
   }
 
-	&__item-name {
-    font-size: 21px;
-    @include ffr600;
+  &__item-name-quantity{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    margin-left: 5px;
+  }
+
+	&__name {
+		font-size: 14px;
+		@include ffr400;
+		position: relative;
+
+		@media (max-width: 768px) {
+			font-size: 12px;
 		}
+	}
+
+	&__brand {
+		font-size: 16px;
+		@include ffr600;
+		position: relative;
+		margin-bottom: 3px;
+
+		@media (max-width: 768px) {
+			font-size: 14px;
+		}
+	}
+
+  &__quantity {
+    display: flex;
+    border-radius: 8px;
+    background: #f6f6fa;
+    height: 38px;
+    border: none;
+    width: 100px;
+    border: 0;
+  }
+  
+  &__quantityMinus, &__quantityPlus {
+    width: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: #000;
+    justify-content: center;
+    border: none;
+    background-color: #f6f6fa;
+
+    }
+  
+  &__quantityNumber {
+    width: 44px;
+    background-color: #f6f6fa;
+    border: none;
+    text-align: center;
+    color: #000;
+    font-size: 14px;
+    font-variation-settings: "wght" 400;
+    font-weight: 400;
+    }
+  
 
 	&__with-discount {
-    @include ffr700;
-    font-size: 30px;
+    @include ffr600;
+    font-size: 27px;
 		}
 
 	&__without-discount {
@@ -128,9 +222,10 @@
     @include ffr400;
 		}
 
-  // &__item-price-btnDelete{
-  
-  // }
+  &__item-price-btnDelete{
+    max-width: 130px;
+    width: 100%;
+  }
 
   &__btn-deleteItem {
     height: 100%;
@@ -163,6 +258,11 @@
     height: 200px;
     background-color: #f6f6fa;
     border-radius: 10px;
+
+    @media (max-width: 950px) {
+			max-width: 900px;
+      margin-top: 20px;
+		}
   }
 
   &__order-top{

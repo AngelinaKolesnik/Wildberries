@@ -1,44 +1,24 @@
-import { updateItemInPreview, fetchItemsInBestsellers } from './index';
-import { body } from './elements_in_DOM';
+export const body = document.querySelector('body');
+//header 
+export const goodsCounterInHeader = document.querySelector('.goods-count');
 
-//применяется при взаимодействии с сердечком из preview
-export const changeLikedInPreview = async (id, liked) => {
-	await fetch(`https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/${id}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			liked: !liked,
-		})
-	})
-		.then(response => response.json());
+//bestsellers & preview
+export const bestsellersList = document.querySelector('.bestsellers__list');
+export const popUpPreview = document.querySelector('.preview');
+export const previewImgFirst = document.querySelector('.preview__img--first');
+export const previewImgSecond = document.querySelector('.preview__img--second');
+export const previewBrand = document.querySelector('.preview__goods-brand');
+export const previewName = document.querySelector('.preview__goods-name');
+export const previewArticle = document.querySelector('.preview__article');
+export const previewInitialPrice = document.querySelector('.price__with-discount');
+export const previewFinallyPrice = document.querySelector('.price__without-discount');
+export const btnHeartInPreview = document.querySelector('.btn-heart');
+export const btnOrderInPreview = document.querySelector('.preview__btn-order');
+export const btnOpenBasketInPreview = document.querySelector('.preview__btn-open-basket');
 
-	updateItemInPreview(id);
-};
-
-//применяется при взаимодействии с созданными через JS кнопками
-export const changeLikedInBestsellers = async (id, liked) => {
-	await fetch(`https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/${id}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			liked: !liked,
-		})
-	})
-		.then(response => response.json());
-
-	fetchItemsInBestsellers();
-};
-
-export function openPopUp(popUp) {
-	popUp.classList.remove('none');
-	body.classList.add('hidden');
-};
-
-export function closePopUp(popUp) {
-	popUp.classList.add('none');
-	body.classList.remove('hidden');
-};
+//basket
+export const basketList = document.querySelector('.basket__list');
+export const basket = document.querySelector('#basket-modal')
+export const btnCloseBasket = document.querySelector('.btn-close-basket')
+export const btnOpenBasket = document.querySelector('#btnToBasket')
+export const btnDeleteItem = document.querySelector('#btnDeleteItem')
