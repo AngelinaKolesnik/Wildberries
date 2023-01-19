@@ -1,6 +1,6 @@
 import { createItem } from './ui';
 import { closePopUp, openPopUp, changeBtn } from './buttons';
-import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, previewBrand, previewName, previewArticle, previewInitialPrice, previewFinallyPrice, btnHeartInPreview, btnOrderInPreview, goodsCounterInHeader, btnOpenBasketInPreview } from './elements_in_DOM';
+import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, previewBrand, previewName, previewArticle, previewInitialPrice, previewFinallyPrice, btnHeartInPreview, btnOrderInPreview, goodsCounterInHeader, btnOpenBasketInPreview,arrowNextPopUp, arrowPrevPopUp } from './elements_in_DOM';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
 //отображение на экране
@@ -29,6 +29,34 @@ export function renderListOfBestsellers(list) {
 				previewInitialPrice.innerHTML = `${list[item].price} $`;
 				previewFinallyPrice.innerHTML = `${finallyPrice} $`;
 				popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
+
+				//кнопка вправо( перелистывание товаров)
+				arrowNextPopUp.addEventListener('click', () => {
+					item = +item+1;
+					
+					previewImgFirst.src = list[item].itemPhoto;
+					previewImgSecond.src = list[item].itemPhoto_2;
+					previewBrand.innerHTML = `${list[item].brand} /`;
+					previewName.innerHTML = list[item].name;
+					previewArticle.innerHTML = list[item].id;
+					previewInitialPrice.innerHTML = `${list[item].price} $`;
+					previewFinallyPrice.innerHTML = `${(list[item].price * (100 - list[item].discount) / 100).toFixed(2)} $`;
+					popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
+				});
+
+				//кнопка влево( перелистывание товаров)
+				arrowPrevPopUp.addEventListener('click', () => {
+					item = +item-1;
+
+					previewImgFirst.src = list[item].itemPhoto;
+					previewImgSecond.src = list[item].itemPhoto_2;
+					previewBrand.innerHTML = `${list[item].brand} /`;
+					previewName.innerHTML = list[item].name;
+					previewArticle.innerHTML = list[item].id;
+					previewInitialPrice.innerHTML = `${list[item].price} $`;
+					previewFinallyPrice.innerHTML = `${(list[item].price * (100 - list[item].discount) / 100).toFixed(2)} $`;
+					popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
+				});
 
 				btnOpenBasketInPreview.addEventListener('click', () => {
 					closePopUp(popUpPreview);

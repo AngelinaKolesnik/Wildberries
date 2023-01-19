@@ -5,6 +5,8 @@ export const goodsCounterInHeader = document.querySelector('.goods-count');
 //bestsellers & preview
 export const bestsellersList = document.querySelector('.bestsellers__list');
 export const popUpPreview = document.querySelector('.preview');
+export const arrowNextPopUp = document.querySelector('.preview-carousel__arrow--next');
+export const arrowPrevPopUp = document.querySelector('.preview-carousel__arrow--prev');
 export const previewImgFirst = document.querySelector('.preview__img--first');
 export const previewImgSecond = document.querySelector('.preview__img--second');
 export const previewBrand = document.querySelector('.preview__goods-brand');
