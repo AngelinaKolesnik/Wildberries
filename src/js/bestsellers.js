@@ -14,17 +14,11 @@ export function renderListOfBestsellers(list) {
 		//вставка элемента
 		bestsellersList.insertAdjacentHTML('beforeend', createItem(list[item], finallyPrice));
 
-		const btnHeartInItem = bestsellersList.querySelector(`button[data-idBtnHeart='${list[item].id}']`);
-
+		//открытие попапа
 		bestsellersList
-			//открытие попапа
 			.querySelector(`button[data-idPreview='${list[item].id}']`)
 			.addEventListener('click', () => {
 				openPopUp(popUpPreview);
-
-				btnHeartInPreview.addEventListener('click', () => {
-					changeHeartStylesInPreview(btnHeartInPreview, list[item].id, btnHeartInItem)
-				});
 
 				//установка параметров попапа
 				previewImgFirst.src = list[item].itemPhoto;
@@ -34,28 +28,14 @@ export function renderListOfBestsellers(list) {
 				previewArticle.innerHTML = list[item].id;
 				previewInitialPrice.innerHTML = `${list[item].price} $`;
 				previewFinallyPrice.innerHTML = `${finallyPrice} $`;
-				btnHeartInPreview.classList.add(`btn-heart--${list[item].id}`);
-				btnOrderInPreview.setAttribute('id', `${list[item].id}-btnToOrderInPreview`);
-
-				// btnOrderInPreview.addEventListener('click', changeBtn(btnOrderInPreview, btnOpenBasketInPreview));
-
-				let btnOrderId = parseInt(btnOrderInPreview.getAttribute('id'));
-
-				addToLocalStorage(btnOrderInPreview, btnOrderId, IN_BASKET_KEY);
-
-				if (btnHeartInItem.classList.contains(`btn-heart--${list[item].id}`) == btnHeartInPreview.classList.contains(`btn-heart--${list[item].id}`) && btnHeartInItem.classList.contains('btn-heart--success')) {
-					changeStyleAdd(btnHeartInPreview);
-
-				} else if (btnHeartInItem.classList.contains(`btn-heart--${list[item].id}`) == btnHeartInPreview.classList.contains(`btn-heart--${list[item].id}`) && !btnHeartInItem.classList.contains('btn-heart--success')) {
-					changeStyleRemove(btnHeartInPreview);
-				};
+				popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
 
 				btnOpenBasketInPreview.addEventListener('click', () => {
 					closePopUp(popUpPreview);
 					changeBtn(btnOpenBasketInPreview, btnOrderInPreview);
 					clearParams(list[item].id);
 					openPopUp(basket);
-				})
+				});
 			});
 
 		//закрытие попапа	
@@ -69,6 +49,41 @@ export function renderListOfBestsellers(list) {
 	};
 };
 
+//попытка (бессмысленная) отделения от цикла, все равно вызывается функция renderListOfBestsellers
+export function addParamsForPreview() {
+
+	if (popUpPreview.hasAttribute('id')) {
+
+		let id = parseInt(popUpPreview.getAttribute('id'));
+
+		btnHeartInPreview.classList.add(`btn-heart--${id}`);
+		btnOrderInPreview.setAttribute('id', `${id}-btnToOrderInPreview`);
+
+		let btnOrderId = parseInt(btnOrderInPreview.getAttribute('id'));
+
+		btnOrderInPreview.addEventListener('click', () => {
+			changeBtn(btnOrderInPreview, btnOpenBasketInPreview);
+			addToLocalStorageSeveral(btnOrderId, IN_BASKET_KEY);
+		});
+
+		
+		const btnHeartInItem = bestsellersList.querySelector(`button[data-idBtnHeart='${id}']`);
+
+		btnHeartInPreview.addEventListener('click', () => {
+			changeHeartStylesInPreview(btnHeartInPreview, id, btnHeartInItem);
+		});
+
+
+		if (btnHeartInItem.classList.contains(`btn-heart--${id}`) == btnHeartInPreview.classList.contains(`btn-heart--${id}`) && btnHeartInItem.classList.contains('btn-heart--success')) {
+			changeStyleAdd(btnHeartInPreview);
+
+		} else if (btnHeartInItem.classList.contains(`btn-heart--${id}`) == btnHeartInPreview.classList.contains(`btn-heart--${id}`) && !btnHeartInItem.classList.contains('btn-heart--success')) {
+			changeStyleRemove(btnHeartInPreview);
+		};
+	};
+};
+
+//очистка preview
 export function clearParams(id) {
 	previewImgFirst.src = '';
 	previewImgSecond.src = '';
@@ -79,45 +94,46 @@ export function clearParams(id) {
 	previewFinallyPrice.innerHTML = '';
 	btnHeartInPreview.classList.remove(`btn-heart--${id}`);
 	btnOrderInPreview.removeAttribute('id');
+	popUpPreview.removeAttribute('id');
 };
 
 export function addToBasket() {
 	//находим все кнопки "добавить в корзину" в бестселлерах
 	const btnsOrderInBestsellers = Array.from(bestsellersList.querySelectorAll('.bestsellers__btn-order'));
-console.log(btnsOrderInBestsellers)
+
 	for (let btn in btnsOrderInBestsellers) {
-		//ключ элемент в array, т.к. id начинаются с 1, а btn с 0
+		//ключ элемент в object, т.к. id начинаются с 1, а btn с 0
 		let id = +btn + 1;
 
-		addToLocalStorage(btnsOrderInBestsellers[btn], id, IN_BASKET_KEY);
+		btnsOrderInBestsellers[btn].addEventListener('click', () => addToLocalStorageSeveral(id, IN_BASKET_KEY));
 	};
 };
 
-export function addToLocalStorage(btn, id, key) {
-	btn.addEventListener('click', () => {
-		let array;
+//сохранение в LocalStorage из секции bestsellers
+export function addToLocalStorageSeveral(id, key) {
+	let object;
 
-		//проверка наличия чего-нибудь в LocalStorage
-		if (localStorage.getItem(key)) {
-			array = JSON.parse(localStorage.getItem(key))
-		} else {
-			//без этого условия, если из LocalStorage ничего не приходит, первый элемент будет null
-			array = {};
-		};
- 
-		//значение ключа в array
-		if (array[id]) {
-			array[id] += 1;
-		} else {
-			array[id] = 1;
-		};
+	//проверка наличия в LocalStorage
+	if (localStorage.getItem(key)) {
+		object = JSON.parse(localStorage.getItem(key));
+	} else {
+		//без этого условия, если из LocalStorage ничего не приходит, первый элемент будет null
+		object = {};
+	};
 
-		localStorage.setItem(key, JSON.stringify(array));
+	//значение ключа в object
+	if (object[id]) {
+		object[id] += 1;
+	} else {
+		object[id] = 1;
+	};
+	
+	localStorage.setItem(key, JSON.stringify(object));
 
-		getQuantityOfGoods(key);
-	});
+	getQuantityOfGoods(key);
 };
 
+//выведение общего кол-ва товаров в хедер (в значок)
 export function getQuantityOfGoods(key) {
 	let quantity;
 
@@ -128,8 +144,7 @@ export function getQuantityOfGoods(key) {
 		quantity = 0;
 	};
 
-	//выведение общего кол-ва товаров в хедер (в значок)
-		goodsCounterInHeader.innerText = quantity;
+	goodsCounterInHeader.innerText = quantity;
 };
 
 export function getButtonsHeartInBestsellers() {
@@ -137,10 +152,34 @@ export function getButtonsHeartInBestsellers() {
 
 	for (let btn in btnsHeart) {
 		btnsHeart[btn].addEventListener('click', () => {
-			console.log(btnsHeart[btn])
-			changeHeartStyles(btnsHeart[btn], btn)
+			let id = +btn + 1;
+
+			addToLocalStorageIsLiked(id, IS_LIKED_KEY);
+			changeHeartStyles(btnsHeart[btn], btn);
 		});
 	};
+};
+
+//сохранение в LocalStorage лайкнутых элементов
+export function addToLocalStorageIsLiked(id, key) {
+	let object;
+
+	//проверка наличия в LocalStorage
+	if (localStorage.getItem(key)) {
+		object = JSON.parse(localStorage.getItem(key));
+	} else {
+		//без этого условия, если из LocalStorage ничего не приходит, первый элемент будет null
+		object = {};
+	};
+
+	//значение ключа в object
+	if (!object[id] || (object[id] == 0)) {
+		object[id] = 1;
+	} else {
+		object[id] = 0;
+	};
+	
+	localStorage.setItem(key, JSON.stringify(object));
 };
 
 function changeHeartStyles(btn, id) {
@@ -169,10 +208,10 @@ function changeHeartStylesInPreview(btn, id, btnInBestsellersList) {
 		changeStyleRemove(btn);
 	};
 
-	if (btn.classList.contains(`btn-heart--${id}`) === btnInBestsellersList.classList.contains(`btn-heart--${id}`) && btn.classList.contains('btn-heart--success')) {
+	if (btn.classList.contains(`btn-heart--${id}`) == btnInBestsellersList.classList.contains(`btn-heart--${id}`) && btn.classList.contains('btn-heart--success')) {
 		changeStyleAdd(btnInBestsellersList);
 
-	} else if (btn.classList.contains(`btn-heart--${id}`) === btnInBestsellersList.classList.contains(`btn-heart--${id}`) && !btn.classList.contains('btn-heart--success')) {
+	} else if (btn.classList.contains(`btn-heart--${id}`) == btnInBestsellersList.classList.contains(`btn-heart--${id}`) && !btn.classList.contains('btn-heart--success')) {
 		changeStyleRemove(btnInBestsellersList);
 	};
 };
@@ -193,4 +232,4 @@ export function changeStyleRemove(btn) {
 	btn.classList.remove('btn-heart--success');
 	btnHeartLeft.classList.remove('btn-heart__left--success');
 	btnHeartRight.classList.remove('btn-heart__right--success');
-}
+};

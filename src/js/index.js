@@ -1,8 +1,8 @@
 'use strict'
 
 import { renderBasketList } from './basket';
-import { basketList } from './elements_in_DOM';
-import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods } from './bestsellers';
+import { basketList, bestsellersList } from './elements_in_DOM';
+import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods, addParamsForPreview } from './bestsellers';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
 //сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
@@ -29,12 +29,19 @@ function getDataFromLocalStorage (key) {
 };
 
 getDataFromLocalStorage(IN_BASKET_KEY);
+getDataFromLocalStorage(IS_LIKED_KEY);
 
 //выведение общего кол-ва товаров в хедер (в значок)
 getQuantityOfGoods(IN_BASKET_KEY);
 
 // вызывается, чтоб информация отобразилась на странице
 fetchItemsInBestsellers();
+
+
+
+bestsellersList.addEventListener('click', () => {
+	addParamsForPreview();
+});
 
 //работа с сервером (basket)
 export async function fetchBasket() {
