@@ -37,8 +37,6 @@ getQuantityOfGoods(IN_BASKET_KEY);
 // вызывается, чтоб информация отобразилась на странице
 fetchItemsInBestsellers();
 
-
-
 bestsellersList.addEventListener('click', () => {
 	addParamsForPreview();
 });
