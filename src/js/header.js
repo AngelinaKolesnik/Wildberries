@@ -18,23 +18,23 @@ let finalPrice = 0; // первоначальная цена (будет мен�
 let goodsCount = {}; // кол-во товаров
 let filterArray = []; 
 
-// async function filterGoods() { // поиск товаров через input
-//     let responce = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/') 
-//     return  await responce.json() 
-//     .then((el) => {
-//         inputEnter.addEventListener('input', (e) => {
-//             cards.innerHTML=''; 
-//             filterArray = el.filter((item) => { // фильтрует товары
-//                 return item.title.toLowerCase().includes(e.target.value.toLowerCase()) // ищет названия карточек в нижнем регистре
-//             })
-//             if(inputEnter.value === '') {
-//                 // должна быть ссылка на рендер карточек
-//                 'https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/'
-//             }          
-//         })
-//     })
-// }
-// filterGoods()
+async function filterGoods() { // поиск товаров через input
+    let responce = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/') 
+    return  await responce.json() 
+    .then((el) => {
+        inputEnter.addEventListener('input', (e) => {
+            cards.innerHTML=''; 
+            filterArray = el.filter((item) => { // фильтрует товары
+                return item.title.toLowerCase().includes(e.target.value.toLowerCase()) // ищет названия карточек в нижнем регистре
+            })  
+            if(inputEnter.value === '') {
+                // должна быть ссылка на рендер карточек
+                'https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/'
+            }          
+        })
+    })
+}
+filterGoods()
 
 
 btnBasket.addEventListener('click', function(e) { 
@@ -62,6 +62,7 @@ btnDelete.addEventListener('click', () => { // удалить товар
 })
 
 function addToBasket(element) { // добавить товар в корзину
+
     if (localStorage.getItem('basketElements')) {
     goodsCount = JSON.parse(localStorage.getItem('basketElements')); // строка преобразуется в объект, в localStorage вернется ключ basketElements
     } else {
