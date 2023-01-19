@@ -29,7 +29,8 @@ export function renderListOfBestsellers(list) {
 				previewInitialPrice.innerHTML = `${list[item].price} $`;
 				previewFinallyPrice.innerHTML = `${finallyPrice} $`;
 				popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
-
+			
+				//открытие корзины при нажатии накнопку "перейти в корзину"
 				btnOpenBasketInPreview.addEventListener('click', () => {
 					closePopUp(popUpPreview);
 					changeBtn(btnOpenBasketInPreview, btnOrderInPreview);
@@ -52,34 +53,34 @@ export function renderListOfBestsellers(list) {
 //попытка (бессмысленная) отделения от цикла, все равно вызывается функция renderListOfBestsellers
 export function addParamsForPreview() {
 
+	//подставление данных в preview
 	if (popUpPreview.hasAttribute('id')) {
-
+		//получение необходимого формата id 
 		let id = parseInt(popUpPreview.getAttribute('id'));
 
-		btnHeartInPreview.classList.add(`btn-heart--${id}`);
-		btnOrderInPreview.setAttribute('id', `${id}-btnToOrderInPreview`);
-
-		let btnOrderId = parseInt(btnOrderInPreview.getAttribute('id'));
+		btnHeartInPreview.setAttribute('id', `${id}-btnHeartInBestsellers`);
 
 		btnOrderInPreview.addEventListener('click', () => {
 			changeBtn(btnOrderInPreview, btnOpenBasketInPreview);
-			addToLocalStorageSeveral(btnOrderId, IN_BASKET_KEY);
+			addToLocalStorageSeveral(id, IN_BASKET_KEY);
 		});
 
-		
-		const btnHeartInItem = bestsellersList.querySelector(`button[data-idBtnHeart='${id}']`);
+		changeStyleBtnHeart(btnHeartInPreview);
 
-		btnHeartInPreview.addEventListener('click', () => {
-			changeHeartStylesInPreview(btnHeartInPreview, id, btnHeartInItem);
+		btnHeartInPreview.addEventListener('click', () => {			
+			addToLocalStorageIsLiked(id, IS_LIKED_KEY);
+			changeStyleBtnHeart(btnHeartInPreview);
+
+			let btnsHeart = Array.from(bestsellersList.querySelectorAll('.btn-heart'));
+
+			//изменение стилей аналогичной кнопки в bestsellers
+			for (let btn in btnsHeart) {
+
+				if (+btn + 1 == id) {
+					changeStyleBtnHeart(btnsHeart[btn]);
+				};
+			};
 		});
-
-
-		if (btnHeartInItem.classList.contains(`btn-heart--${id}`) == btnHeartInPreview.classList.contains(`btn-heart--${id}`) && btnHeartInItem.classList.contains('btn-heart--success')) {
-			changeStyleAdd(btnHeartInPreview);
-
-		} else if (btnHeartInItem.classList.contains(`btn-heart--${id}`) == btnHeartInPreview.classList.contains(`btn-heart--${id}`) && !btnHeartInItem.classList.contains('btn-heart--success')) {
-			changeStyleRemove(btnHeartInPreview);
-		};
 	};
 };
 
@@ -93,6 +94,7 @@ export function clearParams(id) {
 	previewInitialPrice.innerHTML = '';
 	previewFinallyPrice.innerHTML = '';
 	btnHeartInPreview.classList.remove(`btn-heart--${id}`);
+	btnHeartInPreview.removeAttribute('id');
 	btnOrderInPreview.removeAttribute('id');
 	popUpPreview.removeAttribute('id');
 };
@@ -151,13 +153,51 @@ export function getButtonsHeartInBestsellers() {
 	let btnsHeart = Array.from(bestsellersList.querySelectorAll('.btn-heart'));
 
 	for (let btn in btnsHeart) {
+		changeStyleBtnHeart(btnsHeart[btn]);
+
 		btnsHeart[btn].addEventListener('click', () => {
 			let id = +btn + 1;
-
+			
 			addToLocalStorageIsLiked(id, IS_LIKED_KEY);
-			changeHeartStyles(btnsHeart[btn], btn);
+			changeStyleBtnHeart(btnsHeart[btn]);
 		});
 	};
+};
+
+export function changeStyleBtnHeart (btn) {
+	let object;
+	let id = parseInt(btn.getAttribute('id'));
+
+	if (localStorage.getItem(IS_LIKED_KEY)) {
+		object = JSON.parse(localStorage.getItem(IS_LIKED_KEY));
+	} else {
+		//без этого условия, если из LocalStorage ничего не приходит, первый элемент будет null
+		object = {};
+	};
+
+	if (!object[id] || (object[id] == 0)) {
+		changeStyleRemove(btn)
+	} else {
+		changeStyleAdd(btn)
+	};
+};
+
+export function changeStyleAdd(btn) {
+	const btnHeartLeft = btn.querySelector('.btn-heart__left');
+	const btnHeartRight = btn.querySelector('.btn-heart__right');
+
+	btn.classList.add('btn-heart--success');
+	btnHeartLeft.classList.add('btn-heart__left--success');
+	btnHeartRight.classList.add('btn-heart__right--success');
+};
+
+export function changeStyleRemove(btn) {
+	const btnHeartLeft = btn.querySelector('.btn-heart__left');
+	const btnHeartRight = btn.querySelector('.btn-heart__right');
+
+	btn.classList.remove('btn-heart--success');
+	btnHeartLeft.classList.remove('btn-heart__left--success');
+	btnHeartRight.classList.remove('btn-heart__right--success');
 };
 
 //сохранение в LocalStorage лайкнутых элементов
@@ -180,56 +220,4 @@ export function addToLocalStorageIsLiked(id, key) {
 	};
 	
 	localStorage.setItem(key, JSON.stringify(object));
-};
-
-function changeHeartStyles(btn, id) {
-	btn.classList.toggle('btn-heart--success');
-
-	if (btn.classList.contains('btn-heart--success')) {
-		changeStyleAdd(btn);
-	} else {
-		changeStyleRemove(btn);
-	};
-
-	if (btn.classList.contains(`btn-heart--${id}`) == btnHeartInPreview.classList.contains(`btn-heart--${id}`) && btn.classList.contains('btn-heart--success')) {
-		changeStyleAdd(btnHeartInPreview);
-
-	} else if (btn.classList.contains(`btn-heart--${id}`) == btnHeartInPreview.classList.contains(`btn-heart--${id}`) && !btn.classList.contains('btn-heart--success')) {
-		changeStyleRemove(btnHeartInPreview);
-	};
-};
-
-function changeHeartStylesInPreview(btn, id, btnInBestsellersList) {
-	btn.classList.toggle('btn-heart--success');
-
-	if (btn.classList.contains('btn-heart--success')) {
-		changeStyleAdd(btn);
-	} else {
-		changeStyleRemove(btn);
-	};
-
-	if (btn.classList.contains(`btn-heart--${id}`) == btnInBestsellersList.classList.contains(`btn-heart--${id}`) && btn.classList.contains('btn-heart--success')) {
-		changeStyleAdd(btnInBestsellersList);
-
-	} else if (btn.classList.contains(`btn-heart--${id}`) == btnInBestsellersList.classList.contains(`btn-heart--${id}`) && !btn.classList.contains('btn-heart--success')) {
-		changeStyleRemove(btnInBestsellersList);
-	};
-};
-
-export function changeStyleAdd(btn) {
-	const btnHeartLeft = btn.querySelector('.btn-heart__left');
-	const btnHeartRight = btn.querySelector('.btn-heart__right');
-
-	btn.classList.add('btn-heart--success');
-	btnHeartLeft.classList.add('btn-heart__left--success');
-	btnHeartRight.classList.add('btn-heart__right--success');
-};
-
-export function changeStyleRemove(btn) {
-	const btnHeartLeft = btn.querySelector('.btn-heart__left');
-	const btnHeartRight = btn.querySelector('.btn-heart__right');
-
-	btn.classList.remove('btn-heart--success');
-	btnHeartLeft.classList.remove('btn-heart__left--success');
-	btnHeartRight.classList.remove('btn-heart__right--success');
 };
