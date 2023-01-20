@@ -2,6 +2,7 @@ export const body = document.querySelector('body');
 //header 
 export const basketCounterInHeader = document.querySelector('.goods-count');
 export const favoritesCounterInHeader = document.querySelector('.header__liked-counter');
+export const btnHeartInHeader = document.querySelector('.header__heart');
 
 //bestsellers & preview
 export const bestsellersList = document.querySelector('.bestsellers__list');
@@ -16,6 +17,12 @@ export const previewFinallyPrice = document.querySelector('.price__without-disco
 export const btnHeartInPreview = document.querySelector('.btn-heart');
 export const btnOrderInPreview = document.querySelector('.preview__btn-order');
 export const btnOpenBasketInPreview = document.querySelector('.preview__btn-open-basket');
+export const btnHeartRightInPreview = document.querySelector('.btn-heart__right');
+export const btnHeartLeftInPreview = document.querySelector('.btn-heart__left');
+
+//favorive goods 
+export const popUpFavoriteGoods = document.querySelector('.favorite-goods');
+export const favoriteGoodsBtnClose = document.querySelector('.favorite-goods__btn-close');
 
 //basket
 export const basketList = document.querySelector('.basket__list');
@@ -23,4 +30,3 @@ export const basket = document.querySelector('#basket-modal')
 export const btnCloseBasket = document.querySelector('.btn-close-basket')
 export const btnOpenBasket = document.querySelector('#btnToBasket')
 export const btnDeleteItem = document.querySelector('#btnDeleteItem')
-

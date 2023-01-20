@@ -1,12 +1,10 @@
 'use strict'
 
 import { renderBasketList } from './basket';
-import { basketList, bestsellersList, basketCounterInHeader, favoritesCounterInHeader } from './elements_in_DOM';
-import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods, addParamsForPreview } from './bestsellers';
+import { basketList, basketCounterInHeader, favoritesCounterInHeader } from './elements_in_DOM';
+import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, 
+	getQuantityOfGoods } from './bestsellers';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
-
-//сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
-let itemsInBasket = {};
 
 //работа с сервером (mockapi)
 export async function fetchItemsInBestsellers() {
@@ -24,23 +22,20 @@ export async function fetchItemsInBestsellers() {
 //получение данных из LocalStorage
 function getDataFromLocalStorage (key) {
 	if (!itemsInBasket.length && localStorage.getItem(key)) {
-		itemsInBasket = JSON.parse(localStorage.getItem(key));
+		JSON.parse(localStorage.getItem(key));
 	};
 };
 
+// вызывается, чтоб информация отобразилась на странице
+fetchItemsInBestsellers();
+
+//получение данных из LocalStorage
 getDataFromLocalStorage(IN_BASKET_KEY);
 getDataFromLocalStorage(IS_LIKED_KEY);
 
 //выведение общего кол-ва товаров в хедер (в значок)
 getQuantityOfGoods(IN_BASKET_KEY, basketCounterInHeader);
 getQuantityOfGoods(IS_LIKED_KEY, favoritesCounterInHeader);
-
-// вызывается, чтоб информация отобразилась на странице
-fetchItemsInBestsellers();
-
-bestsellersList.addEventListener('click', () => {
-	addParamsForPreview();
-});
 
 //работа с сервером (basket)
 export async function fetchBasket() {

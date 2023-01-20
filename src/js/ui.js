@@ -8,7 +8,7 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, id }, fina
 
 			<div class="bestsellers__discount">-${discount}%</div>
 
-			<button class="btn-heart" id='${id}-btnHeartInBestsellers'>
+			<button class="btn-heart" data-idHeartPreview='${id}'>
 				<div class="btn-heart__left"></div>
 				<div class="btn-heart__right"></div>
 			</button>
