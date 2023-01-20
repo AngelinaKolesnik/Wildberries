@@ -6,6 +6,9 @@ import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket,
 	getQuantityOfGoods } from './bestsellers';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
+//сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
+let itemsInBasket = {};
+
 //работа с сервером (mockapi)
 export async function fetchItemsInBestsellers() {
 	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods/')
@@ -22,7 +25,7 @@ export async function fetchItemsInBestsellers() {
 //получение данных из LocalStorage
 function getDataFromLocalStorage (key) {
 	if (!itemsInBasket.length && localStorage.getItem(key)) {
-		JSON.parse(localStorage.getItem(key));
+		itemsInBasket = JSON.parse(localStorage.getItem(key));
 	};
 };
 
