@@ -1,6 +1,6 @@
 import { createItem } from './ui';
 import { closePopUp, openPopUp, changeBtn } from './buttons';
-import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, previewBrand, previewName, previewArticle, previewInitialPrice, previewFinallyPrice, btnHeartInPreview, btnOrderInPreview, goodsCounterInHeader, btnOpenBasketInPreview } from './elements_in_DOM';
+import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, previewBrand, previewName, previewArticle, previewInitialPrice, previewFinallyPrice, btnHeartInPreview, btnOrderInPreview, basketCounterInHeader, favoritesCounterInHeader, btnOpenBasketInPreview } from './elements_in_DOM';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
 //отображение на экране
@@ -132,11 +132,11 @@ export function addToLocalStorageSeveral(id, key) {
 	
 	localStorage.setItem(key, JSON.stringify(object));
 
-	getQuantityOfGoods(key);
+	getQuantityOfGoods(key, basketCounterInHeader);
 };
 
 //выведение общего кол-ва товаров в хедер (в значок)
-export function getQuantityOfGoods(key) {
+export function getQuantityOfGoods(key, place) {
 	let quantity;
 
 	//получение общего кол-ва товаров 
@@ -146,7 +146,7 @@ export function getQuantityOfGoods(key) {
 		quantity = 0;
 	};
 
-	goodsCounterInHeader.innerText = quantity;
+	place.innerText = quantity;
 };
 
 export function getButtonsHeartInBestsellers() {
@@ -220,4 +220,6 @@ export function addToLocalStorageIsLiked(id, key) {
 	};
 	
 	localStorage.setItem(key, JSON.stringify(object));
+	
+	getQuantityOfGoods(key, favoritesCounterInHeader);
 };

@@ -1,6 +1,7 @@
 export const body = document.querySelector('body');
 //header 
-export const goodsCounterInHeader = document.querySelector('.goods-count');
+export const basketCounterInHeader = document.querySelector('.goods-count');
+export const favoritesCounterInHeader = document.querySelector('.header__liked-counter');
 
 //bestsellers & preview
 export const bestsellersList = document.querySelector('.bestsellers__list');

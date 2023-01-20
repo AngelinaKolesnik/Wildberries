@@ -1,7 +1,7 @@
 'use strict'
 
 import { renderBasketList } from './basket';
-import { basketList, bestsellersList } from './elements_in_DOM';
+import { basketList, bestsellersList, basketCounterInHeader, favoritesCounterInHeader } from './elements_in_DOM';
 import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods, addParamsForPreview } from './bestsellers';
 import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 
@@ -32,7 +32,8 @@ getDataFromLocalStorage(IN_BASKET_KEY);
 getDataFromLocalStorage(IS_LIKED_KEY);
 
 //выведение общего кол-ва товаров в хедер (в значок)
-getQuantityOfGoods(IN_BASKET_KEY);
+getQuantityOfGoods(IN_BASKET_KEY, basketCounterInHeader);
+getQuantityOfGoods(IS_LIKED_KEY, favoritesCounterInHeader);
 
 // вызывается, чтоб информация отобразилась на странице
 fetchItemsInBestsellers();

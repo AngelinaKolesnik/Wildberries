@@ -23,6 +23,14 @@
 					<img class="header__search-img" src="./img/camera.svg" alt="camera">
 				</div>
 
+				<div class="header__heart">
+					<button class="header__btn-heart">
+						<div class="header__btn-heart--left"></div>
+						<div class="header__btn-heart--right"></div>
+						<div class="header__liked-counter"></div>
+					</button>
+				</div>
+
 				<div class="btnBasket" id="btnToBasket">
 					<span class="basket__wrapper">
 						<img id="basket-img" class="basket__img" src="./img/basket.svg" alt="basket"></img>
@@ -70,7 +78,7 @@
 		</div>
 	</section>
 
-	<section class="preview none">
+	<section class="preview pop-up none">
 		<div class="container">
 			<div class="preview__carousel">
 				<button class="arrow arrow--prev preview-carousel__arrow--prev">
@@ -122,6 +130,58 @@
 		<div class="container">
 			<h2 class="bestsellers__title">Хиты продаж</h2>
 			<ul class="bestsellers__list"></ul>
+		</div>
+	</section>
+
+	<section class="favorite-goods pop-up none">
+		<div class="container">
+			<div class="favorite-goods__wrap">
+				
+				<button class="favorite-goods__btn-close btn-close"></button>
+
+				<h2 class="favorite-goods__title">Избраннное</h2>
+				
+				<div class="favorite-goods__search">
+					<input class="favorite-goods__search-input" type="text"
+						placeholder="Поиск...">
+					<button class="favorite-goods__search-btn">
+						<img src="./src/img/loupe.svg" alt="">
+					</button>
+				</div>
+
+				<button class="favorite-goods__delete-all">Очистить избранное</button>
+
+				<div class="favorite-goods__content">
+					<ul class="favorite-goods__list">
+
+						<li class="favorite-goods__item">
+							<div class="favorite-goods__product">
+								<img class="favorite-goods__img" src="./src/img/01255600.n_1.png" alt="product">
+
+								<div class="favorite-goods__about">
+									<div class="favorite-goods__brand">бренд</div>
+									<div class="favorite-goods__name">название</div>
+								</div>
+							</div>
+
+							<div class="favorite-goods__price">
+								<div class="favorite-goods__with-discount">900</div>
+								<div class="favorite-goods__without-discount">1000</div>
+							</div>
+
+							<div class="favorite-goods__actions">
+								<button class="favorite-goods__delete-this">
+									<img src="./src/img/trash.svg" alt="удалить">
+								</button>
+								<button class="favorite-goods__basket">
+									<img src="./src/img/basket.svg" alt="в корзину">
+								</button>
+							</div>
+						</li>	
+
+					</ul>
+				</div>	
+			</div>
 		</div>
 	</section>
 
