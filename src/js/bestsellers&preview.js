@@ -4,10 +4,23 @@ import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecon
 	previewBrand, previewName, previewArticle, previewInitialPrice,previewFinallyPrice, 
 	btnHeartInPreview, btnOrderInPreview, basketCounterInHeader, favoritesCounterInHeader, 
 	btnOpenBasketInPreview, btnHeartRightInPreview, btnHeartLeftInPreview } from './elements_in_DOM';
-import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
+import { IN_BASKET_KEY, IS_LIKED_KEY, MOCKAPI_URL } from './constants';
+
+//работа с сервером (mockapi). получение всех элементов
+export async function fetchItemsInBestsellers() {
+	let content = await fetch(MOCKAPI_URL)
+		.then(res => res.json());
+
+	const renderProducts = new Promise((res, rej) => {
+		res(renderListOfBestsellers(content))
+	});
+	renderProducts
+		.then(getButtonsHeartInBestsellers())
+		.then(addToBasket());
+};
 
 //отображение на экране
-export function renderListOfBestsellers(list) {
+function renderListOfBestsellers(list) {
 	bestsellersList.innerHTML = '';
 
 	for (let item in list) {
@@ -78,7 +91,7 @@ btnHeartLeftInPreview.addEventListener('click', (e) => {
 	changeStylesHeartInPreview(id);
 });
 
-export function changeStylesHeartInPreview(id) {
+function changeStylesHeartInPreview(id) {
 	addToLocalStorageIsLiked(id, IS_LIKED_KEY);
 	changeStyleBtnHeart(btnHeartInPreview);
 
@@ -94,7 +107,7 @@ export function changeStylesHeartInPreview(id) {
 };
 
 //очистка preview
-export function clearParams() {
+function clearParams() {
 	previewImgFirst.src = '';
 	previewImgSecond.src = '';
 	previewBrand.innerHTML = '';
@@ -106,7 +119,7 @@ export function clearParams() {
 	btnOrderInPreview.removeAttribute('data-idOrderPreview');
 };
 
-export function addToBasket() {
+function addToBasket() {
 	//находим все кнопки "добавить в корзину" в бестселлерах
 	const btnsOrderInBestsellers = Array
 		.from(bestsellersList
@@ -123,7 +136,7 @@ export function addToBasket() {
 };
 
 //сохранение в LocalStorage из секции bestsellers
-export function addToLocalStorageSeveral(id, key) {
+function addToLocalStorageSeveral(id, key) {
 	let object;
 
 	//проверка наличия в LocalStorage
@@ -163,7 +176,7 @@ export function getQuantityOfGoods(key, place) {
 	place.innerText = quantity;
 };
 
-export function getButtonsHeartInBestsellers() {
+function getButtonsHeartInBestsellers() {
 	let btnsHeart = Array.from(bestsellersList.querySelectorAll('.btn-heart'));
 
 	for (let btn in btnsHeart) {
@@ -178,7 +191,7 @@ export function getButtonsHeartInBestsellers() {
 	};
 };
 
-export function changeStyleBtnHeart(btn) {
+function changeStyleBtnHeart(btn) {
 	let object;
 	const id = btn.getAttribute('data-idHeartPreview');
 
@@ -197,7 +210,7 @@ export function changeStyleBtnHeart(btn) {
 	};
 };
 
-export function changeStyleAdd(btn) {
+function changeStyleAdd(btn) {
 	const leftPart = btn.querySelector('.btn-heart__left');
 	const rightPart = btn.querySelector('.btn-heart__right');
 
@@ -206,7 +219,7 @@ export function changeStyleAdd(btn) {
 	rightPart.classList.add('btn-heart__right--success');
 };
 
-export function changeStyleRemove(btn) {
+function changeStyleRemove(btn) {
 	const leftPart = btn.querySelector('.btn-heart__left');
 	const rightPart = btn.querySelector('.btn-heart__right');
 
@@ -216,7 +229,7 @@ export function changeStyleRemove(btn) {
 };
 
 //сохранение в LocalStorage лайкнутых элементов
-export function addToLocalStorageIsLiked(id, key) {
+function addToLocalStorageIsLiked(id, key) {
 	let object;
 
 	//проверка наличия в LocalStorage
