@@ -2,8 +2,9 @@
 
 import { renderBasketList } from './basket';
 import { basketList, basketCounterInHeader, favoritesCounterInHeader } from './elements_in_DOM';
-import { fetchItemsInBestsellers, getQuantityOfGoods } from './bestsellers&preview';
+import { fetchItemsInBestsellers } from './bestsellers&preview';
 import { IN_BASKET_KEY, IS_LIKED_KEY, MOCKAPI_URL } from './constants';
+import { getQuantityOfGoods } from './LocalStorage';
 
 //сюда из LocalStorage приходят id и кол-во элементов, которые были добавлены в корзину
 let itemsInBasket = {};

@@ -25,6 +25,7 @@ export const btnHeartLeftInPreview = document.querySelector('.btn-heart__left');
 export const popUpFavoriteGoods = document.querySelector('.favorite-goods');
 export const favoriteGoodsBtnClose = document.querySelector('.favorite-goods__btn-close');
 export const favoriteGoodsList = document.querySelector('.favorite-goods__list');
+export const favoriteGoodsDeleteAll = document.querySelector('.favorite-goods__delete-all');
 
 //basket
 export const basketList = document.querySelector('.basket__list');

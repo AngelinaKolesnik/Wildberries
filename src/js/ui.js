@@ -27,7 +27,7 @@ export const createItem = ({ name, price, brand, discount, itemPhoto, id }, fina
 	</li>`;
 };
 
-export const createLikedElements = ({ name, price, brand, itemPhoto }, finallyPrice) => {
+export const createLikedElements = ({ name, price, brand, itemPhoto, id }, finallyPrice) => {
 	return `
 	<li class="favorite-goods__item">
 		<div class="favorite-goods__product">
@@ -45,8 +45,8 @@ export const createLikedElements = ({ name, price, brand, itemPhoto }, finallyPr
 		</div>
 
 		<div class="favorite-goods__actions">
-			<button class="favorite-goods__delete-this">удалить</button>
-			<button class="favorite-goods__basket">в корзину</button>
+			<button class="favorite-goods__delete-this" data-idRemoveFavorites='${id}'>удалить</button>
+			<button class="favorite-goods__basket" data-idOrderFavorites='${id}'>в корзину</button>
 		</div>
 	</li>`;
 };

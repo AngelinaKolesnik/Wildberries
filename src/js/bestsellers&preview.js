@@ -2,9 +2,10 @@ import { createItem } from './ui';
 import { closePopUp, openPopUp, changeBtn } from './buttons';
 import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, 
 	previewBrand, previewName, previewArticle, previewInitialPrice,previewFinallyPrice, 
-	btnHeartInPreview, btnOrderInPreview, basketCounterInHeader, favoritesCounterInHeader, 
-	btnOpenBasketInPreview, btnHeartRightInPreview, btnHeartLeftInPreview } from './elements_in_DOM';
+	btnHeartInPreview, btnOrderInPreview, btnOpenBasketInPreview, btnHeartRightInPreview, 
+	btnHeartLeftInPreview } from './elements_in_DOM';
 import { IN_BASKET_KEY, IS_LIKED_KEY, MOCKAPI_URL } from './constants';
+import { addToLocalStorageIsLiked, addToLocalStorageSeveral } from './LocalStorage';
 
 //работа с сервером (mockapi). получение всех элементов
 export async function fetchItemsInBestsellers() {
@@ -74,7 +75,6 @@ function renderListOfBestsellers(list) {
 
 btnOrderInPreview.addEventListener('click', (e) => {
 	const id = e.target.getAttribute('data-idOrderPreview');
-	console.log(id)
 	changeBtn(btnOrderInPreview, btnOpenBasketInPreview);
 	addToLocalStorageSeveral(id, IN_BASKET_KEY);
 });
@@ -135,47 +135,6 @@ function addToBasket() {
 	};
 };
 
-//сохранение в LocalStorage из секции bestsellers
-function addToLocalStorageSeveral(id, key) {
-	let object;
-
-	//проверка наличия в LocalStorage
-	if (localStorage.getItem(key)) {
-		object = JSON.parse(localStorage.getItem(key));
-	} else {
-		//без этого условия, если из LocalStorage ничего не приходит,
-		// первый элемент будет null
-		object = {};
-	};
-
-	//значение ключа в object
-	if (object[id]) {
-		object[id] += 1;
-	} else {
-		object[id] = 1;
-	};
-
-	localStorage.setItem(key, JSON.stringify(object));
-
-	getQuantityOfGoods(key, basketCounterInHeader);
-};
-
-//выведение общего кол-ва товаров в хедер (в значок)
-export function getQuantityOfGoods(key, place) {
-	let quantity;
-
-	//получение общего кол-ва товаров 
-	if (localStorage.getItem(key)) {
-		quantity = Object
-			.values(JSON.parse(localStorage.getItem(key)))
-			.reduce((acc, cur) => acc + cur);
-	} else {
-		quantity = 0;
-	};
-
-	place.innerText = quantity;
-};
-
 function getButtonsHeartInBestsellers() {
 	let btnsHeart = Array.from(bestsellersList.querySelectorAll('.btn-heart'));
 
@@ -191,7 +150,7 @@ function getButtonsHeartInBestsellers() {
 	};
 };
 
-function changeStyleBtnHeart(btn) {
+export function changeStyleBtnHeart(btn) {
 	let object;
 	const id = btn.getAttribute('data-idHeartPreview');
 
@@ -226,29 +185,4 @@ function changeStyleRemove(btn) {
 	btn.classList.remove('btn-heart--success');
 	leftPart.classList.remove('btn-heart__left--success');
 	rightPart.classList.remove('btn-heart__right--success');
-};
-
-//сохранение в LocalStorage лайкнутых элементов
-function addToLocalStorageIsLiked(id, key) {
-	let object;
-
-	//проверка наличия в LocalStorage
-	if (localStorage.getItem(key)) {
-		object = JSON.parse(localStorage.getItem(key));
-	} else {
-		//без этого условия, если из LocalStorage ничего не приходит, 
-		//первый элемент будет null
-		object = {};
-	};
-
-	//значение ключа в object
-	if (!object[id] || (object[id] == 0)) {
-		object[id] = 1;
-	} else {
-		object[id] = 0;
-	};
-
-	localStorage.setItem(key, JSON.stringify(object));
-
-	getQuantityOfGoods(key, favoritesCounterInHeader);
 };
