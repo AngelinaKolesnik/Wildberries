@@ -1,4 +1,5 @@
 export const body = document.querySelector('body');
+
 //header 
 export const basketCounterInHeader = document.querySelector('.goods-count');
 export const favoritesCounterInHeader = document.querySelector('.header__liked-counter');
@@ -23,6 +24,8 @@ export const btnHeartLeftInPreview = document.querySelector('.btn-heart__left');
 //favorive goods 
 export const popUpFavoriteGoods = document.querySelector('.favorite-goods');
 export const favoriteGoodsBtnClose = document.querySelector('.favorite-goods__btn-close');
+export const favoriteGoodsList = document.querySelector('.favorite-goods__list');
+export const favoriteGoodsDeleteAll = document.querySelector('.favorite-goods__delete-all');
 
 //basket
 export const basketList = document.querySelector('.basket__list');
