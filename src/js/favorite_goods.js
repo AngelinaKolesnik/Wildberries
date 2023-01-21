@@ -1,16 +1,17 @@
 import {
 	btnHeartInHeader, popUpFavoriteGoods, favoriteGoodsBtnClose, favoriteGoodsList,
-	favoriteGoodsDeleteAll, favoritesCounterInHeader, bestsellersList,
+	favoriteGoodsDeleteAll, favoritesCounterInHeader, bestsellersList, favoriteGoodsSearchInput
 } from './elements_in_DOM';
 import { closePopUp, openPopUp } from './buttons';
 import { IS_LIKED_KEY, MOCKAPI_URL, IN_BASKET_KEY } from './constants';
 import { createLikedElements } from './ui';
-import { clearLocalStorage, getQuantityOfGoods, addToLocalStorageSeveral, addToLocalStorageIsLiked } from './LocalStorage';
+import { clearLocalStorage, getQuantityOfGoods, addToLocalStorageSeveral, addToLocalStorageIsLiked 
+} from './LocalStorage';
 import { changeStyleBtnHeart } from './bestsellers&preview';
 
 btnHeartInHeader.addEventListener('click', () => {
 	openPopUp(popUpFavoriteGoods);
-	getFavoriteGoods();
+	getFavoriteGoods(IS_LIKED_KEY);
 });
 
 favoriteGoodsBtnClose.addEventListener('click', () => {
@@ -23,7 +24,7 @@ favoriteGoodsDeleteAll.addEventListener('click', () => {
 });
 
 function renderPage() {
-	getFavoriteGoods();
+	getFavoriteGoods(IS_LIKED_KEY);
 	getQuantityOfGoods(IS_LIKED_KEY, favoritesCounterInHeader);
 
 	let btnsHeart = Array.from(bestsellersList.querySelectorAll('.btn-heart'));
@@ -31,10 +32,10 @@ function renderPage() {
 	for (let btn in btnsHeart) {
 		changeStyleBtnHeart(btnsHeart[btn]);
 	};
-}
+};
 
-function getFavoriteGoods() {
-	let favorites = JSON.parse(localStorage.getItem(IS_LIKED_KEY));
+function getFavoriteGoods(key) {
+	let favorites = JSON.parse(localStorage.getItem(key));
 
 	for (let el of Object.keys(favorites)) {
 
@@ -57,18 +58,43 @@ function getFavoriteGoods() {
 		fetch(el)
 			.then(res => res.json())
 	))
+		.then((list) => { 
+			renderFavorites(list);
+		})
+
+		Promise.all(favoriteGoods.map((el) =>
+		fetch(el)
+			.then(res => res.json())
+	))
 		.then((list) => {
-			favoriteGoodsList.innerHTML = '';
+			favoriteGoodsSearchInput.addEventListener('input', () => {
+				let search;
+				if (favoriteGoodsSearchInput.value.trim() != '') {
+					search = [...list].filter((el) => {
+						return el.brand.toLowerCase().includes(favoriteGoodsSearchInput.value.toLowerCase()) ||
+						el.name.toLowerCase().includes(favoriteGoodsSearchInput.value.toLowerCase()) ||
+						el.id.includes(favoriteGoodsSearchInput.value) 
+					});
+				} else {
+					search = [...list];
+				};
 
-			list.forEach((item) => {
-				let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
-
-				favoriteGoodsList.innerHTML += createLikedElements(item, finallyPrice);
+				renderFavorites(search);
 			});
-
-			addToBasketInFavorites();
-			removeElementInFavorites();
 		});
+};
+
+function renderFavorites(list) {
+	favoriteGoodsList.innerHTML = '';
+
+	list.forEach((item) => {
+		let finallyPrice = (item.price * (100 - item.discount) / 100).toFixed(2);
+
+		favoriteGoodsList.innerHTML += createLikedElements(item, finallyPrice);
+	});
+
+	addToBasketInFavorites();
+	removeElementInFavorites();
 };
 
 function addToBasketInFavorites() {

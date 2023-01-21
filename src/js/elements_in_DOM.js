@@ -26,6 +26,7 @@ export const popUpFavoriteGoods = document.querySelector('.favorite-goods');
 export const favoriteGoodsBtnClose = document.querySelector('.favorite-goods__btn-close');
 export const favoriteGoodsList = document.querySelector('.favorite-goods__list');
 export const favoriteGoodsDeleteAll = document.querySelector('.favorite-goods__delete-all');
+export const favoriteGoodsSearchInput = document.querySelector('.favorite-goods__search-input');
 
 //basket
 export const basketList = document.querySelector('.basket__list');
