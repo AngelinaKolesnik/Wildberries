@@ -7,6 +7,10 @@ import { IN_BASKET_KEY, IS_LIKED_KEY } from './constants';
 export function renderListOfBestsellers(list) {
 	bestsellersList.innerHTML = '';
 
+	if (list.length === 0) {
+		bestsellersList.innerHTML = 'Not found';
+	}
+
 	for (let item in list) {
 		//итоговая цена
 		let finallyPrice = (list[item].price * (100 - list[item].discount) / 100).toFixed(2);
@@ -141,9 +145,11 @@ export function getQuantityOfGoods(key) {
 
 	//получение общего кол-ва товаров 
 	if (localStorage.getItem(key)) {
-		quantity = Object.values(JSON.parse(localStorage.getItem(key))).reduce((acc, cur) => acc + cur);
+		goodsCounterInHeader.classList.remove('none');
+		let values = Object.values(JSON.parse(localStorage.getItem(key)));
+		quantity = values.length && values.reduce((acc, cur) => acc + cur);
 	} else {
-		quantity = 0;
+		goodsCounterInHeader.classList.add('none');
 	};
 
 	goodsCounterInHeader.innerText = quantity;
