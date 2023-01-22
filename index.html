@@ -23,6 +23,14 @@
 					<img class="header__search-img" src="./img/camera.svg" alt="camera">
 				</div>
 
+				<div class="header__heart">
+					<button class="header__btn-heart">
+						<div class="header__btn-heart--left"></div>
+						<div class="header__btn-heart--right"></div>
+						<div class="header__liked-counter"></div>
+					</button>
+				</div>
+
 				<div class="btnBasket" id="btnToBasket">
 					<span class="basket__wrapper">
 						<img id="basket-img" class="basket__img" src="./img/basket.svg" alt="basket"></img>
@@ -70,7 +78,7 @@
 		</div>
 	</section>
 
-	<section class="preview none">
+	<section class="preview pop-up none">
 		<div class="container">
 			<div class="preview__carousel">
 				<button class="arrow arrow--prev preview-carousel__arrow--prev">
@@ -125,6 +133,31 @@
 		</div>
 	</section>
 
+	<section class="favorite-goods pop-up none">
+		<div class="container">
+			<div class="favorite-goods__wrap">
+				
+				<button class="favorite-goods__btn-close btn-close"></button>
+
+				<h2 class="favorite-goods__title">Избраннное</h2>
+				
+				<div class="favorite-goods__search">
+					<input class="favorite-goods__search-input" type="text"
+						placeholder="Поиск по названию, бренду или артикулу">
+					<button class="favorite-goods__search-btn">
+						<img src="./src/img/loupe.svg" alt="">
+					</button>
+				</div>
+
+				<button class="favorite-goods__delete-all">Очистить избранное</button>
+
+				<div class="favorite-goods__content">
+					<ul class="favorite-goods__list"></ul>
+				</div>	
+			</div>
+		</div>
+	</section>
+
 	<section class="basket none" id="basket-modal">
 		<div class="container basket__container">
 			<div class="basket__wrap">
@@ -175,6 +208,7 @@
 
 
 	<script src="./src/js/index.js" type='module'></script>
+	<script src="./src/js/favorite_goods.js" type='module'></script>
 	<script src="./src/js/carousel.js"></script>
 
 </body>
