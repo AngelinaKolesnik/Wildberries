@@ -9,21 +9,30 @@ const slideWidth = slides[0].getBoundingClientRect().width;
 
 //расположить слайды рядом друг к другу
 
-const setSlidePosition = (slide,index) => {
+const setSlidePosition = (slide,index) => {                 
     slide.style.left = slideWidth * index + 'px' 
 }
 slides.forEach(setSlidePosition);
 
-const moveToSlide = (track,currentSlide,targetSlide) => {
+const moveToSlide = (track,currentSlide,targetSlide,currentDot, targetDot) => {
+
+    if (currentSlide == slides[0] && targetSlide == null){
+        targetSlide = slides.at(-1)
+        targetDot = dots.at(-1)
+        
+    }
+    if (currentSlide == slides.at(-1) && targetSlide == null)
+    {
+        targetSlide = slides[0];
+        targetDot = dots[0];   
+    }
+
     track.style.transform = 'translateX(-' + targetSlide.style.left + ')'; 
     currentSlide.classList.remove('active');
     targetSlide.classList.add('active');
-}
-
-const updateToDots = (currentDot,targetDot) => {
     currentDot.classList.remove('active'); 
-    targetDot.classList.add('active');       //активный индикатор меняет цвет                 
-}  
+    targetDot.classList.add('active');   
+}
 
 //клик влево - переход слайда влево
 
@@ -33,8 +42,8 @@ prevBtn.addEventListener('click', e => {
     const currentDot = navIndicate.querySelector('.active'); //переключение активного инкатора при нажатии на стрелку влево
     const prevDot = currentDot.previousElementSibling;
     
-    moveToSlide(track,currentSlide,prevSlide);
-    updateToDots(currentDot,prevDot);
+    console.log(prevSlide);
+    moveToSlide(track,currentSlide,prevSlide,currentDot,prevDot);
 })
 
 //клик вправо - переход слайда вправо
@@ -45,8 +54,7 @@ nextBtn.addEventListener('click', e => {
     const currentDot = navIndicate.querySelector('.active'); //переключение активного инкатора при нажатии на стрелку вправо
     const nextDot = currentDot.nextElementSibling;
 
-    moveToSlide(track,currentSlide,nextSlide)
-    updateToDots(currentDot,nextDot);
+    moveToSlide(track,currentSlide,nextSlide,currentDot,nextDot);
 })
 
 //клик на индикатор, переход к слайду
@@ -61,17 +69,7 @@ navIndicate.addEventListener('click', e =>{
     const targetIndex = dots.findIndex(dot => dot === targetDot);
     const targetSlide = slides[targetIndex];
 
-    moveToSlide(track,currentSlide,targetSlide);
-    updateToDots(currentDot,targetDot);
+    moveToSlide(track,currentSlide,targetSlide, currentDot,targetDot);
 
-    // if(targetIndex === 0){
-    //     prevBtn.classList.add('hidden');
-    //     nextBtn.classList.remove('hidden');
-    // } else if (targetIndex === slides.length-1){
-    //     prevBtn.classList.remove('hidden');
-    //     nextBtn.classList.add('hidden');
-    // } else {
-    //     prevBtn.classList.remove('hidden');
-    //     nextBtn.classList.remove('hidden');     //это пока не получается сделать...
-    // }
+    console.log(currentSlide);
 })

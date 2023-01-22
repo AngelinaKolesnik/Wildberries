@@ -3,7 +3,7 @@ import { closePopUp, openPopUp, changeBtn } from './buttons';
 import { basket, popUpPreview, bestsellersList, previewImgFirst, previewImgSecond, 
 	previewBrand, previewName, previewArticle, previewInitialPrice,previewFinallyPrice, 
 	btnHeartInPreview, btnOrderInPreview, btnOpenBasketInPreview, btnHeartRightInPreview, 
-	btnHeartLeftInPreview } from './elements_in_DOM';
+	btnHeartLeftInPreview, arrowNextPopUp, arrowPrevPopUp, arrowPrevImg, arrowNextImg } from './elements_in_DOM';
 import { IN_BASKET_KEY, IS_LIKED_KEY, MOCKAPI_URL } from './constants';
 import { addToLocalStorageIsLiked, addToLocalStorageSeveral } from './LocalStorage';
 
@@ -31,15 +31,18 @@ function renderListOfBestsellers(list) {
 		//вставка элемента
 		bestsellersList.insertAdjacentHTML('beforeend', createItem(list[item], finallyPrice));
 
+		
+
 		//открытие попапа
 		bestsellersList
 			.querySelector(`button[data-idPreview='${list[item].id}']`)
 			.addEventListener('click', () => {
 				openPopUp(popUpPreview);
+				productPhotos = [list[item].itemPhoto, list[item].itemPhoto_2]
 
 				//установка параметров попапа
-				previewImgFirst.src = list[item].itemPhoto;
-				previewImgSecond.src = list[item].itemPhoto_2;
+				previewImgFirst.src = productPhotos[0];
+				previewImgSecond.src = productPhotos[1];
 				previewBrand.innerHTML = `${list[item].brand} /`;
 				previewName.innerHTML = list[item].name;
 				previewArticle.innerHTML = list[item].id;
@@ -49,6 +52,47 @@ function renderListOfBestsellers(list) {
 				btnHeartInPreview.setAttribute('data-idHeartPreview', `${list[item].id}`);
 				btnHeartRightInPreview.setAttribute('data-idHeartPreview', `${list[item].id}`);
 				btnHeartLeftInPreview.setAttribute('data-idHeartPreview', `${list[item].id}`);
+
+				//кнопка вправо( перелистывание товаров)
+				arrowNextPopUp.addEventListener('click', () => {
+					item = +item+1;
+					productPhotos = [list[item].itemPhoto, list[item].itemPhoto_2]
+					
+					previewImgFirst.src = productPhotos[0];
+					previewImgSecond.src = productPhotos[1];
+					previewBrand.innerHTML = `${list[item].brand} /`;
+					previewName.innerHTML = list[item].name;
+					previewArticle.innerHTML = list[item].id;
+					previewInitialPrice.innerHTML = `${list[item].price} $`;
+					previewFinallyPrice.innerHTML = `${(list[item].price * (100 - list[item].discount) / 100).toFixed(2)} $`;
+					popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
+				});
+
+				//кнопка влево( перелистывание товаров)
+				arrowPrevPopUp.addEventListener('click', () => {
+					item = +item-1;
+
+					productPhotos = [list[item].itemPhoto, list[item].itemPhoto_2]
+					previewImgFirst.src = productPhotos[0];
+					previewImgSecond.src = productPhotos[1];
+					previewBrand.innerHTML = `${list[item].brand} /`;
+					previewName.innerHTML = list[item].name;
+					previewArticle.innerHTML = list[item].id;
+					previewInitialPrice.innerHTML = `${list[item].price} $`;
+					previewFinallyPrice.innerHTML = `${(list[item].price * (100 - list[item].discount) / 100).toFixed(2)} $`;
+					popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
+				})
+
+				// const arrImg = [previewImgFirst.src, previewImgSecond.src];
+				// let slideImg = document.querySelectorAll(".preview__img");
+				
+				arrowNextImg.addEventListener('click', () => {
+					previewImgFirst.src = productPhotos[1];
+				})
+
+				arrowPrevImg.addEventListener('click', () => {
+					previewImgFirst.src = productPhotos[0];
+				}) 
 
 				//изменение стилей сердечка (лайкнуто или нет) аналогично сердцу в bestsellers
 				changeStyleBtnHeart(btnHeartInPreview);
