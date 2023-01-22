@@ -8,7 +8,7 @@ export function renderListOfBestsellers(list) {
 	bestsellersList.innerHTML = '';
 
 	if (list.length === 0) {
-		bestsellersList.innerHTML = 'Not found';
+		bestsellersList.innerHTML = 'По вашему запросу ничего не найдено';
 	}
 
 	for (let item in list) {

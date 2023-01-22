@@ -1,4 +1,4 @@
-.preview {
+.pop-up {
 	position: fixed;
 	content: '';
 	z-index: 1;
@@ -14,6 +14,9 @@
 	.container {
 		z-index: 2;
 	}
+}
+
+.preview {
 
 	&__carousel {
 		display: flex;
