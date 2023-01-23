@@ -1,4 +1,4 @@
-import {basket,btnCloseBasket,btnOpenBasket,body,btnDelete, basketList, itemInBasket, btnDeleteItem} from './elements_in_DOM';
+import {basket,btnCloseBasket,btnOpenBasket,body, basketList, } from './elements_in_DOM';
 import { IN_BASKET_KEY } from './constants';
 import { getDataFromLocalStorage, saveDataToLocalStorage } from './index';
 import { getQuantityOfGoods } from './bestsellers';

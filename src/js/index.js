@@ -1,9 +1,8 @@
 'use strict'
 
-import { renderBasketList } from './basket';
+// import { renderBasketList } from './basket';
 import { basketList, bestsellersList, basketCounterInHeader, favoritesCounterInHeader } from './elements_in_DOM';
-import { fetchItemsInBestsellers } from './bestsellers&preview';
-import { renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, getQuantityOfGoods, addParamsForPreview } from './bestsellers';
+import { fetchItemsInBestsellers, renderListOfBestsellers, getButtonsHeartInBestsellers, addToBasket, } from './bestsellers&preview';
 import { IN_BASKET_KEY, IS_LIKED_KEY, MOCKAPI_URL } from './constants';
 import { getQuantityOfGoods } from './LocalStorage';
 
@@ -47,6 +46,6 @@ getQuantityOfGoods(IN_BASKET_KEY);
 // вызывается, чтоб информация отобразилась на странице
 fetchItemsInBestsellers();
 
-bestsellersList.addEventListener('click', () => {
-	addParamsForPreview();
-});
+// bestsellersList.addEventListener('click', () => {
+// 	addParamsForPreview();
+// });
