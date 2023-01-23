@@ -4,7 +4,6 @@ import { getDataFromLocalStorage, saveDataToLocalStorage } from './index';
 import { getQuantityOfGoods } from './bestsellers';
 
 //откр и закр корзину
-
 btnOpenBasket.addEventListener('click', showBasket)
 btnCloseBasket.addEventListener('click', closeBasket)
 
@@ -26,7 +25,6 @@ function closeBasket (){
 
 function clearBasketItem() {
   console.log(localStorage);
-  // localStorage.removeItem('cartItems');
   countCartId = {};
   goodsCounter.innerText = '0';
   emptyCart();
@@ -47,8 +45,7 @@ export async function fetchBasket(itemsInBasket) {
 	let content = await fetch('https://63a861d5f4962215b580f1f2.mockapi.io/api/goods?inBasket=true')
 		.then(response => response.json());
 
-	//func to filter response with ids in itemsInBasket
-
+	//фильтрует response с id в itemsInBasket
 	let itemsInBasketIds = Object.keys(itemsInBasket);
 
 	let basketArr = content.filter((item) => {
@@ -165,5 +162,4 @@ function updateQuantity (item) {
   getQuantityOfGoods(IN_BASKET_KEY);
 
   fetchBasket(itemInBasket);
-
 }
