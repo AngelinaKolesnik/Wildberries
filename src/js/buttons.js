@@ -1,16 +1,24 @@
-import { body } from './elements_in_DOM';
+export const body = document.querySelector('body');
+//header 
+export const goodsCounterInHeader = document.querySelector('.goods-count');
 
-export function openPopUp(popUp) {
-	popUp.classList.remove('none');
-	body.classList.add('hidden');
-};
+//bestsellers & preview
+export const bestsellersList = document.querySelector('.bestsellers__list');
+export const popUpPreview = document.querySelector('.preview');
+export const previewImgFirst = document.querySelector('.preview__img--first');
+export const previewImgSecond = document.querySelector('.preview__img--second');
+export const previewBrand = document.querySelector('.preview__goods-brand');
+export const previewName = document.querySelector('.preview__goods-name');
+export const previewArticle = document.querySelector('.preview__article');
+export const previewInitialPrice = document.querySelector('.price__with-discount');
+export const previewFinallyPrice = document.querySelector('.price__without-discount');
+export const btnHeartInPreview = document.querySelector('.btn-heart');
+export const btnOrderInPreview = document.querySelector('.preview__btn-order');
+export const btnOpenBasketInPreview = document.querySelector('.preview__btn-open-basket');
 
-export function closePopUp(popUp) {
-	popUp.classList.add('none');
-	body.classList.remove('hidden');
-};
-
-export function changeBtn (activeBtn, passiveBtn) {
-	activeBtn.classList.add('none');
-	passiveBtn.classList.remove('none');
-};
+//basket
+export const basketList = document.querySelector('.basket__list');
+export const basket = document.querySelector('#basket-modal')
+export const btnCloseBasket = document.querySelector('.btn-close-basket')
+export const btnOpenBasket = document.querySelector('#btnToBasket')
+export const btnDeleteItem = document.querySelector('#btnDeleteItem')

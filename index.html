@@ -19,7 +19,7 @@
 				<div id="header-search" class="header__search">
 					<input id="input-enter" class="header__search-input" value="" type="text"
 						placeholder="Введите название товара">
-					<button id="search-words" class="header__search-btn"></button>
+					<i id="search-words" class="header__search-btn"></i>
 					<img class="header__search-img" src="./img/camera.svg" alt="camera">
 				</div>
 
@@ -41,7 +41,7 @@
 
 			</nav>
 		</div>
-	</section>
+	</section>	
 
 	<section class="carousel" id="carousel">
 		<div class="carousel__container">
@@ -84,7 +84,7 @@
 				<button class="arrow arrow--prev preview-carousel__arrow--prev">
 					<div class="arrow__line"></div>
 				</button>
-
+	
 				<div class="preview__wrap">
 					<div class="preview__slider-img">
 						<img class="preview__img preview__img--first" alt="">
@@ -159,37 +159,24 @@
 	</section>
 
 	<section class="basket none" id="basket-modal">
-		<div class="container basket__container">
-			<div class="basket__wrap">
+    	<div class="container basket__container">
+      		<div class="basket__wrap">
 
 				<div class="basket__topString">
 					<h2 class="basket__title">Корзина</h2>
 					<button class="basket__btn-close btn-close-basket"></button>
 				</div>
-
+			
 				<div class="basket__content">
 					<div class="basket__content-row">
 						<ul class="basket__list">
-
-							<!-- <li class="basket__item">
-              <div class="basket__item-img-name">
-                <img class="basket__item-img" src="./src/img/01255600.n_1.png" alt="product">
-                <h3 class="basket__item-name">Сгущенка сладкая</h3>
-              </div>
-              <div class="basket__item-price-btnDelete">
-                <div class="basket__with-discount">900 р</div>
-                <div class="basket__without-discount">1000 р</div>
-                <button class="basket__btn-deleteItem">Удалить</button>
-              </div>
-            </li> -->
 						</ul>
-
 					</div>
 
 					<div class="basket__content-order">
 						<div class="basket__order-top">
 							<h3 class="basket__order-title">Итого:</h3>
-							<div class="basket__order-allPrice">1000$</div>
+							<div class="basket__order-allPrice"></div>
 						</div>
 
 						<div class="basket__order-adress">
@@ -205,11 +192,12 @@
 			</div>
 		</div>
 	</section>
-
+           
 
 	<script src="./src/js/index.js" type='module'></script>
 	<script src="./src/js/favorite_goods.js" type='module'></script>
 	<script src="./src/js/carousel.js"></script>
+	<script src="./src/js/header.js" type='module'></script>
 
 </body>
 

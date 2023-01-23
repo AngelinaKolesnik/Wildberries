@@ -80,7 +80,7 @@ function renderListOfBestsellers(list) {
 					previewArticle.innerHTML = list[item].id;
 					previewInitialPrice.innerHTML = `${list[item].price} $`;
 					previewFinallyPrice.innerHTML = `${(list[item].price * (100 - list[item].discount) / 100).toFixed(2)} $`;
-					popUpPreview.setAttribute('id', `${list[item].id}-Preview`);
+
 				})
 
 				// const arrImg = [previewImgFirst.src, previewImgSecond.src];
